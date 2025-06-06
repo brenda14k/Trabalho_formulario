@@ -17,7 +17,6 @@
 
         <span id="erros"></span>
 
-
         <div class="formgroup">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" placeholder="nome completo…">
@@ -33,10 +32,11 @@
             <input type="email" id="email" name="email">
         </div>
 
-         <div class="formgroup">
+        <div class="formgroup">
             <label for="telefone">Número de Telefone:</label>
-            <input type="number" id="telefone" name="telefone" placeholder="" >
+            <input type="text" id="telefone" name="telefone" placeholder="(+XX) XXXX-XXXX">
         </div>
+
         <div class="formgroup">
             <label>Habilidades:</label>
             <label for="html">
@@ -60,8 +60,6 @@
                 <option value="EUA">Estados Unidos America</option>
                 <option value="Pt">Portugal</option>
                 <option value="Pr">Paraguay</option>
-
-
             </select>
         </div>
 
@@ -73,76 +71,66 @@
         <button type="submit">Enviar</button>
     </form>
 
-    
-    
-    <!---Parte do código em Java Script -->
     <script type="text/javascript">
-
-        // Coleta os dados do formulário
-        let nome = document.querySelector("#nome");
-        let data_nascimento = document.querySelector("#data_nascimento");   
-        let email = document.querySelector("#email");
-        let telefone = document.querySelector("#telefone");  
-        let habilidades = document.querySelector("#habilidades")
-        let pais = document.querySelector("#pais");      
-        
-        let erros = document.querySelector("#erros");
-        
-        //nome.style.fontSize = "50px";
-
-
-
+        // Função simplificada para processar o formulário
         function processar_formulario() {
+            let erros = document.querySelector("#erros");
+            erros.textContent = '';  // Limpa a área de erros
+
+            let nome = document.querySelector("#nome").value;
+            let data_nascimento = document.querySelector("#data_nascimento").value;
+            let email = document.querySelector("#email").value;
+            let telefone = document.querySelector("#telefone").value;
+            let habilidades = document.querySelectorAll('input[name="habilidades"]:checked').length;
+            let pais = document.querySelector("#pais").value;
             
+            let hoje = new Date();
+            let hojeFormatado = hoje.toISOString().split('T')[0];  // Formato "YYYY-MM-DD"
 
-            if(nome.value == "" || nome.value.length < 2){
-                console.log("Nome informado invalido")
-                erros.textContent = "Nome informado invalido"
-
-            }
-
-
-          if(data_nascimento.value == "" ){
-                console.log("Data informada invalido")
-                erros.textContent = "Data informada invalido"
-
-            }
-            let hojeFormatado = hoje.toISOString().split('T')[0]; //toISOString compara datas também é utilizdo em banco de dados.
-            //split pega somente a informação da hora.
-
-            // Verifica se a data selecionada é a mesma que a de hoje
-            if (data_nascimento.value === hojeFormatado) {
-                console.log("Erro: A data de hoje não pode ser selecionada");
-                erros.textContent = "Não é permitido selecionar a data de hoje!";
+            // Validação do nome
+            if (nome == "" || nome.length < 2) {
+                erros.textContent = "Nome informado inválido.\n";
                 return false;
             }
 
-          if(email == "" || email.indexOf("@") === -1 || !email.endsWith(".com.br") ){
-            console.log(" email informado invalido")
-            erros.textContent = "email informado invalido"
+            // Validação da data de nascimento
+            if (data_nascimento == "") {
+                erros.textContent += "Data de nascimento inválida.\n";
+                return false;
+            }
+            if (data_nascimento === hojeFormatado) {
+                erros.textContent += "Não é permitido selecionar a data de hoje!\n";
+                return false;
+            }
 
-               if(telefone == "" || telefone.value < 9 ){
-            console.log("Telefone informado invalido")
-            erros.textContent = "Telfone informado invalido"
-               }
-               if(habilidades == ""){
-            console.log(" O campo habilidades não pode ficar em vazio") // isso aparece no console quando vai em inspecionar é uma mensagem para o programador saber o erro.
-            erros.textContent = " O campo habilidades não pode ficar em vazio"
+            // Validação do e-mail
+            if (email == "" || email.indexOf("@") === -1 || !email.endsWith(".com.br")) {
+                erros.textContent += "E-mail informado inválido.\n";
+                return false;
+            }
 
-             if( == ""){
-            console.log("Telefone informado invalido")
-            erros.textContent = "Telfone informado invalido"
-               }       
+            // Validação do telefone (apenas números)
+            if (telefone == "" || telefone.length < 13) {  // 13 caracteres no formato +XX (XX) XXXXX-XXXX
+                erros.textContent += "Telefone informado inválido.\n";
+                return false;
+            }
 
-                    if (telefone.length > 0) {
-            resultado += '+' + telefone.substring(0, 2);  // Código do país
+            // Validação das habilidades
+            if (habilidades == 0) {
+                erros.textContent += "O campo de habilidades não pode ficar vazio.\n";
+                return false;
+            }
+
+            // Validação do país
+            if (pais == "") {
+                erros.textContent += "Por favor, selecione um país.\n";
+                return false;
+            }
+
+            return true;  // O formulário pode ser enviado
         }
-        if (telefone.length > 2) {
-            resultado += ' (' + telefone.substring(2, 4) + ')';  // Código de área
-        }
-        if (telefone.length > 4) {
-            resultado += ' ' + telefone.substring(4, 10);  // Número do telefone
-        }
+ 
+
 //indexOf() é usado para encontrar a posição de um determinado caractere ou sequência de caracteres dentro de uma string.
 //endsWith() é usado para verificar se uma string termina com uma determinada sequência de caracteres.
 
