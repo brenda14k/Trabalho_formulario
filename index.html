@@ -1,5 +1,7 @@
 <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -12,7 +14,6 @@
 
 <body>
     <form action="" onsubmit="return processar_formulario()">
-
         <h3>Cadastre-se</h3>
 
         <span id="erros"></span>
@@ -109,9 +110,9 @@
                 return false;
             }
 
-            // Validação do telefone (apenas números)
+            // Validação do telefone (apenas números, com formatação)
             let telefoneFormatado = telefone.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
-            if (telefoneFormatado == "" || telefoneFormatado.length < 11) {  // Espera um número com pelo menos 11 dígitos
+            if (telefoneFormatado == "" || telefoneFormatado.length < 10) {  // Verifica se tem pelo menos 10 dígitos
                 erros.textContent += "Telefone informado inválido.\n";
                 return false;
             }
@@ -131,10 +132,31 @@
             return true;  // O formulário pode ser enviado
         }
 
+        // Formatação do telefone enquanto o usuário digita
+        document.getElementById("telefone").addEventListener("input", function(event) {
+            // Remove tudo o que não for número (dígitos)
+            let telefone = event.target.value.replace(/\D/g, '');
+            let resultado = '';
 
-            return true;  // O formulário pode ser enviado
-        }
+            // Adiciona a formatação conforme o número de dígitos
+            if (telefone.length > 0) {
+                resultado += '+' + telefone.substring(0, 2);  // Código do país
+            }
+            if (telefone.length > 2) {
+                resultado += ' (' + telefone.substring(2, 4) + ')';  // Código de área
+            }
+            if (telefone.length > 4) {
+                resultado += ' ' + telefone.substring(4, 9);  // Número do telefone
+            }
+            if (telefone.length > 9) {
+                resultado += '-' + telefone.substring(9, 13);  // Últimos 4 dígitos
+            }
+
+            // Atualiza o campo com a formatação
+            event.target.value = resultado;
+        
  
+
 
 //indexOf() é usado para encontrar a posição de um determinado caractere ou sequência de caracteres dentro de uma string.
 //endsWith() é usado para verificar se uma string termina com uma determinada sequência de caracteres.
