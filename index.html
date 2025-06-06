@@ -1,30 +1,78 @@
 <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
 
-
-
-  
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Exemplo</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <form action="" onsubmit="return processar_formulario()">
-        <h3>Cadastre-se</h3>
+  <form action="" onsubmit="return processar_formulario()">
+    <h3>Cadastre-se</h3>
 
-        <span id="erros"></span>
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="nome completo…">
+    </div>
 
-        <div class="formgroup">
-            <label for="telefone">Número de Telefone:</label>
-            <input type="text" id="telefone" name="telefone" placeholder=" +XX (XX) XXXXX-XXXX">
-        </div>
+    <div class="form-group">
+      <label for="data_nascimento">Data de Nascimento:</label>
+      <input type="date" id="data_nascimento" name="data_nascimento">
+    </div>
 
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label>Habilidades:</label>
+      <label for="html">
+        <input type="checkbox" id="html" name="habilidades" value="HTML"> HTML
+      </label>
+      <label for="css">
+        <input type="checkbox" id="css" name="habilidades" value="CSS"> CSS
+      </label>
+      <label for="js">
+        <input type="checkbox" id="js" name="habilidades" value="JS"> JavaScript
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="pais">País:</label>
+      <select id="pais" name="pais">
+        <option value="br">Brasil</option>
+        <option value="ar">Argentina</option>
+        <option value="us">Estados Unidos</option>
+        <option value="jp">Japão</option>
+        <option value="fr">França</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="comentarios">Comentários:</label><br>
+      <textarea id="comentarios" name="comentarios"></textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="submit">Enviar</button>
+    </div>
+  </form>
+<!--Parte de Java Script--->
+  <script>
+    function processar_formulario() {
+      // Obter os dados dos campos do formulário
+      let nome = document.querySelector("#nome").value;
+      let dataNascimento = document.querySelector("#data_nascimento").value;
+      let email = document.querySelector("#email").value;
+      let comentarios = document.querySelector("#comentarios").value;
+      let pais = document.querySelector("#pais").value;
+
+  
 
 
 
@@ -38,7 +86,7 @@
 
             return false;  // Previne o envio real do formulário para testes
         }
-    </script>
+    
 
 
     <!--froala-->
