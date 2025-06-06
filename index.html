@@ -134,13 +134,17 @@
             erros.textContent = "Telfone informado invalido"
                }       
 
+                    if (telefone.length > 0) {
+            resultado += '+' + telefone.substring(0, 2);  // Código do país
+        }
+        if (telefone.length > 2) {
+            resultado += ' (' + telefone.substring(2, 4) + ')';  // Código de área
+        }
+        if (telefone.length > 4) {
+            resultado += ' ' + telefone.substring(4, 10);  // Número do telefone
+        }
 //indexOf() é usado para encontrar a posição de um determinado caractere ou sequência de caracteres dentro de uma string.
 //endsWith() é usado para verificar se uma string termina com uma determinada sequência de caracteres.
-
-
-
-            
-
 
             return false;  // Previne o envio real do formulário para testes
         }
