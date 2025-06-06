@@ -3,7 +3,9 @@
 
 
 
-            <!DOCTYPE html>
+  
+
+    <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -129,6 +131,32 @@
                 erros.textContent += "Por favor, selecione um país.\n";
                 return false;
             }
+
+            return true;  // O formulário pode ser enviado
+        }
+
+        // Formatação do telefone enquanto o usuário digita
+        document.getElementById("telefone").addEventListener("input", function(event) {
+            let telefone = event.target.value.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
+            let resultado = '';
+
+            // Adiciona a formatação conforme o número de dígitos
+            if (telefone.length > 0) {
+                resultado += '+' + telefone.substring(0, 2);  // Código do país
+            }
+            if (telefone.length > 2) {
+                resultado += ' (' + telefone.substring(2, 4) + ')';  // Código de área
+            }
+            if (telefone.length > 4) {
+                resultado += ' ' + telefone.substring(4, 9);  // Número do telefone
+            }
+            if (telefone.length > 9) {
+                resultado += '-' + telefone.substring(9, 13);  // Últimos 4 dígitos
+            }
+
+            // Atualiza o campo com a formatação
+            event.target.value = resultado;
+
 
             return true;  // O formulário pode ser enviado
         }
