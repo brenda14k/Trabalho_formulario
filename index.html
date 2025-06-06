@@ -57,7 +57,7 @@
                 <option value="br">Brasil</option>
                 <option value="CA">Canadá</option>
                 <option value="Ch">Chile</option>
-                <option value="EUA">Estados Unidos America</option>
+                <option value="EUA">Estados Unidos América</option>
                 <option value="Pt">Portugal</option>
                 <option value="Pr">Paraguay</option>
             </select>
@@ -72,7 +72,7 @@
     </form>
 
     <script type="text/javascript">
-        // Função simplificada para processar o formulário
+        // Função para processar o formulário
         function processar_formulario() {
             let erros = document.querySelector("#erros");
             erros.textContent = '';  // Limpa a área de erros
@@ -83,7 +83,7 @@
             let telefone = document.querySelector("#telefone").value;
             let habilidades = document.querySelectorAll('input[name="habilidades"]:checked').length;
             let pais = document.querySelector("#pais").value;
-            
+
             let hoje = new Date();
             let hojeFormatado = hoje.toISOString().split('T')[0];  // Formato "YYYY-MM-DD"
 
@@ -110,7 +110,8 @@
             }
 
             // Validação do telefone (apenas números)
-            if (telefone == "" || telefone.length < 13) {  // 13 caracteres no formato +XX (XX) XXXXX-XXXX
+            let telefoneFormatado = telefone.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
+            if (telefoneFormatado == "" || telefoneFormatado.length < 11) {  // Espera um número com pelo menos 11 dígitos
                 erros.textContent += "Telefone informado inválido.\n";
                 return false;
             }
@@ -126,6 +127,10 @@
                 erros.textContent += "Por favor, selecione um país.\n";
                 return false;
             }
+
+            return true;  // O formulário pode ser enviado
+        }
+
 
             return true;  // O formulário pode ser enviado
         }
