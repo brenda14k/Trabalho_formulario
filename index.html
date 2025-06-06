@@ -1,14 +1,22 @@
+<!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <form action="/submit" method="post">
+    <form action="" onsubmit="return processar_formulario()">
+
         <h3>Cadastre-se</h3>
+
+        <span id="erros"></span>
+
 
         <div class="formgroup">
             <label for="nome">Nome:</label>
@@ -43,13 +51,13 @@
             <select id="pais" name="pais">
                 <option value="Ar">Argentina</option>
                 <option value="br">Brasil</option>
-                 <option value="CA">Canadá</option>
-                  <option value="Ch">Chile</option>
-                  <option value="EUA">Estados Unidos America</option>
+                <option value="CA">Canadá</option>
+                <option value="Ch">Chile</option>
+                <option value="EUA">Estados Unidos America</option>
                 <option value="Pt">Portugal</option>
                 <option value="Pr">Paraguay</option>
-               
-                
+
+
             </select>
         </div>
 
@@ -58,19 +66,70 @@
             <textarea id="comentarios" name="comentarios"></textarea>
         </div>
 
-        <div class="formgroup">
-            <button type="submit">Enviar</button>
-        </div>
-        <script type="text/javascript"
-src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_edi
-tor.pkgd.min.js"></script>
-<link
-href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_e
-ditor.pkgd.min.css" rel="stylesheet" type="text/css" />
-<script>
- new FroalaEditor
-('textarea');
-</script>
+        <button type="submit">Enviar</button>
     </form>
+
+    
+    
+    <!---Parte do código em JAVA -->
+    <script type="text/javascript">
+
+        // Coleta os dados do formulário
+        let nome = document.querySelector("#nome");
+        let data_nascimento = document.querySelector("#data_nascimento");   
+        let email = document.querySelector("#email");
+        let habilidades = document.querySelector("#habilidades")
+        let pais = document.querySelector("#pais");      
+        
+        let erros = document.querySelector("#erros");
+        
+        //nome.style.fontSize = "50px";
+
+
+
+        function processar_formulario() {
+            
+
+            if(nome.value == "" || nome.value.length < 2){
+                console.log("Nome informado invalido")
+                erros.textContent = "Nome informado invalido"
+
+            }
+
+
+          if(data_nascimento.value == "" ){
+                console.log("Data informada invalido")
+                erros.textContent = "Data informada invalido"
+
+            }
+
+
+          if(email == "" ){
+            console.log(" email informada invalido")
+            erros.textContent = "email informada invalido"
+
+        }
+
+
+
+
+            
+
+
+            return false;  // Previne o envio real do formulário para testes
+        }
+    </script>
+
+
+    <!--froala-->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
+        type="text/css" />
+    <script>
+        new FroalaEditor
+            ('textarea');
+    </script>
 </body>
+
 </html>
