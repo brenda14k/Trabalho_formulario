@@ -4,137 +4,29 @@
 
 
   
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário</title>
-    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
     <form action="" onsubmit="return processar_formulario()">
         <h3>Cadastre-se</h3>
 
         <span id="erros"></span>
 
         <div class="formgroup">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="nome completo…">
-        </div>
-
-        <div class="formgroup">
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input id="data_nascimento" name="data_nascimento" type="date">
-        </div>
-
-        <div class="formgroup">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-        </div>
-
-        <div class="formgroup">
             <label for="telefone">Número de Telefone:</label>
             <input type="text" id="telefone" name="telefone" placeholder="(+XX) XXXXX-XXXX">
-        </div>
-
-        <div class="formgroup">
-            <label>Habilidades:</label>
-            <label for="html">
-                <input type="checkbox" id="html" name="habilidades" value="HTML">HTML
-            </label>
-            <label for="css">
-                <input type="checkbox" id="css" name="habilidades" value="CSS">CSS
-            </label>
-            <label for="js">
-                <input type="checkbox" id="js" name="habilidades" value="JS">JavaScript
-            </label>
-        </div>
-
-        <div class="formgroup">
-            <label for="pais">País:</label>
-            <select id="pais" name="pais">
-                <option value="Ar">Argentina</option>
-                <option value="br">Brasil</option>
-                <option value="CA">Canadá</option>
-                <option value="Ch">Chile</option>
-                <option value="EUA">Estados Unidos América</option>
-                <option value="Pt">Portugal</option>
-                <option value="Pr">Paraguay</option>
-            </select>
-        </div>
-
-        <div class="formgroup">
-            <label for="comentarios">Comentários:</label><br>
-            <textarea id="comentarios" name="comentarios"></textarea>
         </div>
 
         <button type="submit">Enviar</button>
     </form>
 
     <script type="text/javascript">
-        // Função para processar o formulário
-        function processar_formulario() {
-            let erros = document.querySelector("#erros");
-            erros.textContent = '';  // Limpa a área de erros
-
-            let nome = document.querySelector("#nome").value;
-            let data_nascimento = document.querySelector("#data_nascimento").value;
-            let email = document.querySelector("#email").value;
-            let telefone = document.querySelector("#telefone").value;
-            let habilidades = document.querySelectorAll('input[name="habilidades"]:checked').length;
-            let pais = document.querySelector("#pais").value;
-
-            let hoje = new Date();
-            let hojeFormatado = hoje.toISOString().split('T')[0];  // Formato "YYYY-MM-DD"
-
-            // Validação do nome
-            if (nome == "" || nome.length < 2) {
-                erros.textContent = "Nome informado inválido.\n";
-                return false;
-            }
-
-            // Validação da data de nascimento
-            if (data_nascimento == "") {
-                erros.textContent += "Data de nascimento inválida.\n";
-                return false;
-            }
-            if (data_nascimento === hojeFormatado) {
-                erros.textContent += "Não é permitido selecionar a data de hoje!\n";
-                return false;
-            }
-
-            // Validação do e-mail
-            if (email == "" || email.indexOf("@") === -1 || !email.endsWith(".com.br")) {
-                erros.textContent += "E-mail informado inválido.\n";
-                return false;
-            }
-
-            // Validação do telefone (apenas números, com formatação)
-            let telefoneFormatado = telefone.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
-            if (telefoneFormatado == "" || telefoneFormatado.length < 10) {  // Verifica se tem pelo menos 10 dígitos
-                erros.textContent += "Telefone informado inválido.\n";
-                return false;
-            }
-
-            // Validação das habilidades
-            if (habilidades == 0) {
-                erros.textContent += "O campo de habilidades não pode ficar vazio.\n";
-                return false;
-            }
-
-            // Validação do país
-            if (pais == "") {
-                erros.textContent += "Por favor, selecione um país.\n";
-                return false;
-            }
-
-            return true;  // O formulário pode ser enviado
-        }
-
         // Formatação do telefone enquanto o usuário digita
         document.getElementById("telefone").addEventListener("input", function(event) {
             let telefone = event.target.value.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
@@ -145,17 +37,18 @@
                 resultado += '+' + telefone.substring(0, 2);  // Código do país
             }
             if (telefone.length > 2) {
-                resultado += ' (' + telefone.substring(2, 4) + ')';  // Código de área
+                resultado += ' (' + telefone.substring(2, 4) + ')';  // Código de área (DDD)
             }
             if (telefone.length > 4) {
-                resultado += ' ' + telefone.substring(4, 9);  // Número do telefone
+                resultado += ' ' + telefone.substring(4, 9);  // Número do telefone (primeiros 5 dígitos)
             }
             if (telefone.length > 9) {
-                resultado += '-' + telefone.substring(9, 13);  // Últimos 4 dígitos
+                resultado += '-' + telefone.substring(9, 13);  // Últimos 4 dígitos do telefone
             }
 
             // Atualiza o campo com a formatação
             event.target.value = resultado;
+        });
 
 
             return true;  // O formulário pode ser enviado
