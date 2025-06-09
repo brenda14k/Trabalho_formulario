@@ -101,27 +101,7 @@
       if (dataNascimento === '') {
         document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
         isValid = false;
-      } else {
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas a data
-
-        const dataInformada = new Date(dataNascimento);
-
-        // Calcula a data limite de um ano atrás
-        const umAnoAtras = new Date();
-        umAnoAtras.setFullYear(hoje.getFullYear() - 1);
-        umAnoAtras.setHours(0, 0, 0, 0); // Zera as horas da data limite
-
-        // Verifica se a data informada é o mesmo dia de hoje
-        if (dataInformada.getTime() === hoje.getTime()) {
-          document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser a data de hoje.';
-          isValid = false;
-        }
-        // Verifica se a data informada é no futuro ou mais de um ano atrás
-        else if (dataInformada > hoje || dataInformada < umAnoAtras) {
-          document.getElementById("erroDataNascimento").textContent = 'A data de nascimento deve ser de até um ano atrás e não pode ser a data de hoje.';
-          isValid = false;
-        }
+     
       }
 
       // Valida o Email
