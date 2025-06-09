@@ -1,6 +1,9 @@
 <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-<!DOCTYPE html>
+
+
+     
+     <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -17,7 +20,7 @@
 
     <div class="form-group">
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" placeholder="Nome completo…" valeu="">
+      <input type="text" id="nome" name="nome" placeholder="Nome completo…" value="">
       <div class="error" id="erroNome"></div>
     </div>
 
@@ -49,15 +52,14 @@
 
     <div class="form-group">
       <label for="pais">País:</label>
-       <option value="" disabled selected>Selecione um país</option> 
-       <option value="Ar">Argentina</option>
+      <select id="pais" name="pais">
+        <option value="" disabled selected>Selecione um país</option> <!-- Opção vazia -->
+        <option value="Ar">Argentina</option>
         <option value="Br">Brasil</option>
-         <option value="Kor">Coreia do Sul</option>
+        <option value="Kor">Coreia do Sul</option>
         <option value="Ca">Canada</option>
-       <option value="jp">Japão</option
+        <option value="jp">Japão</option>
         <option value="Pr">Paraguai</option>
-    </div>
-      
       </select>
       <div class="error" id="erroPais"></div>
     </div>
@@ -104,7 +106,6 @@
       if (dataNascimento === '') {
         document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
         isValid = false;
-     
       }
 
       // Valida o Email
@@ -139,7 +140,6 @@
       return isValid;
     }
   </script>
-
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
   <script>
