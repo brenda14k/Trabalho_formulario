@@ -98,7 +98,7 @@
         isValid = false;
       }
 
-    // Valida a Data de Nascimento (não pode ser a data de hoje)
+// Valida a Data de Nascimento (não pode ser a data de hoje)
 if (dataNascimento === '') {
     document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
     isValid = false;
@@ -118,10 +118,9 @@ if (dataNascimento === '') {
         document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser o dia de hoje.';
         isValid = false;
     }
-
-    // Verifica se a data informada está fora do intervalo de um ano atrás até o dia de hoje
+    // Verifica se a data informada é no futuro ou se é mais de um ano atrás
     else if (dataInformada > hoje || dataInformada < umAnoAtras) {
-        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento deve ser de até um ano atrás.';
+        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento deve ser de até um ano atrás e não pode ser a data de hoje.';
         isValid = false;
     }
 }
