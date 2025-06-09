@@ -74,14 +74,14 @@
 
   <script>
     function processar_formulario() {
-      // Obter os dados dos campos do formulário
+      // Obtem os dados dos campos do formulário
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
       let email = document.querySelector("#email").value;
       let comentarios = document.querySelector("#comentarios").value;
       let pais = document.querySelector("#pais").value;
 
-      // Limpar as mensagens de erro anteriores
+      // Limpa as mensagens de erro anteriores
       document.getElementById("erroNome").textContent = '';
       document.getElementById("erroDataNascimento").textContent = '';
       document.getElementById("erroEmail").textContent = '';
@@ -91,12 +91,12 @@
 
       let isValid = true;
 
-      // Validar Nome
+      // Valida o Nome
       if (nome.trim() === '') {
         document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
         isValid = false;
-      } else if (nome.length < 2) {
-        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 2 caracteres.';
+      } else if (nome.length < 3) {
+        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 3 caracteres.';
         isValid = false;
       }
 
@@ -106,8 +106,8 @@
         isValid = false;
       }
 
-      // Validar Email
-      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      // Valida o Email
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;/* só aceita se tiver um @*
       if (email.trim() === '') {
         document.getElementById("erroEmail").textContent = 'O e-mail é obrigatório.';
         isValid = false;
@@ -116,26 +116,23 @@
         isValid = false;
       }
 
-      // Validar Habilidades
+      // Valida as Habilidades
       let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
       if (habilidades.length === 0) {
+         document.getElementById("erroHabilibades").textContent = 'Esse campo é obrigatório.';
+        <br>
         document.getElementById("erroHabilidades").textContent = 'Por favor, selecione ao menos uma habilidade.';
         isValid = false;
       }
 
-      // Validar País
+      // Valida o País
       if (pais === '') {
         document.getElementById("erroPais").textContent = 'O país é obrigatório.';
         isValid = false;
       }
 
-      // Validar Comentários
-      if (comentarios.trim() === '') {
-        document.getElementById("erroComentarios").textContent = 'Os comentários são obrigatórios.';
-        isValid = false;
-      }
-
-      // Se o formulário for válido, exibe o alerta de sucesso
+     
+      // formulário válido
       if (isValid) {
         alert("Formulário enviado com sucesso!");
       }
