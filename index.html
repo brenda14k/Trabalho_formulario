@@ -1,7 +1,6 @@
 <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -61,6 +60,12 @@
     </div>
 
     <div class="form-group">
+      <label for="comentarios">Comentários:</label><br>
+      <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
+      <div class="error" id="erroComentarios"></div>
+    </div>
+
+    <div class="form-group">
       <button type="submit">Enviar</button>
     </div>
   </form>
@@ -71,6 +76,7 @@
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
       let email = document.querySelector("#email").value;
+      let comentarios = document.querySelector("#comentarios").value;  // Comentários não tem validação
       let pais = document.querySelector("#pais").value;
 
       // Limpa as mensagens de erro anteriores
@@ -79,6 +85,7 @@
       document.getElementById("erroEmail").textContent = '';
       document.getElementById("erroHabilidades").textContent = '';
       document.getElementById("erroPais").textContent = '';
+      document.getElementById("erroComentarios").textContent = '';  // Limpa erro de comentários
 
       let isValid = true;
 
@@ -137,14 +144,24 @@
       return isValid;
     }
   </script>
- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
   <script>
     new FroalaEditor('textarea');
   </script>
 
-
-
 </body>
 
 </html>
+
+  //*    // Valida o Nome (mínimo de 3 caracteres)
+      if (nome.trim() === '') {
+        document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
+        isValid = false;
+      } else if (nome.length < 3) {
+        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 3 caracteres.';
+        isValid = false;
+      }*//
+
+ 
