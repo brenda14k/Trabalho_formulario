@@ -66,22 +66,6 @@
   </form>
 
   <script>
-    // Ajusta as datas mínimas e máximas para o campo de data de nascimento
-    window.onload = function() {
-      const hoje = new Date();
-      hoje.setDate(hoje.getDate() - 1);  // Define a data mínima como ontem
-
-      const umAnoDepois = new Date(hoje);
-      umAnoDepois.setFullYear(hoje.getFullYear() + 1);  // Define a data máxima como 1 ano à frente
-
-      // Formata as datas no formato 'YYYY-MM-DD' para o campo de data
-      const minDate = hoje.toISOString().split('T')[0];
-      const maxDate = umAnoDepois.toISOString().split('T')[0];
-
-      document.getElementById("data_nascimento").min = minDate;
-      document.getElementById("data_nascimento").max = maxDate;
-    };
-
     function processar_formulario() {
       // Obtem os dados dos campos do formulário
       let nome = document.querySelector("#nome").value;
@@ -107,26 +91,16 @@
         isValid = false;
       }
 
-      // Validar Data de Nascimento (não pode ser a data de hoje e até 1 ano no futuro)
+      // Validar Data de Nascimento (não pode ser a data de hoje)
       if (dataNascimento === '') {
         document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
         isValid = false;
       } else {
         const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);  // Remove a hora da data de hoje
-        const umAnoDepois = new Date(hoje);
-        umAnoDepois.setFullYear(hoje.getFullYear() + 1);  // Define a data máxima como 1 ano à frente
         const dataInformada = new Date(dataNascimento);
-
         // Verifica se a data é maior ou igual à data de hoje
         if (dataInformada >= hoje) {
           document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser hoje ou no futuro.';
-          isValid = false;
-        }
-        
-        // Verifica se a data é mais de 1 ano à frente
-        if (dataInformada > umAnoDepois) {
-          document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser mais de um ano à frente.';
           isValid = false;
         }
       }
@@ -162,13 +136,14 @@
       // Retorna falso para impedir o envio real do formulário durante os testes
       return isValid;
     }
-</script>
-
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+  </script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
   <script>
     new FroalaEditor('textarea');
   </script>
+
+
 
 </body>
 
