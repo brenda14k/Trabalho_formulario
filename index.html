@@ -3,32 +3,46 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulário de Exemplo</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilo para mensagens de erro */
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <form action="" onsubmit="return processar_formulario()">
+  <form id="formCadastro" onsubmit="return processar_formulario()">
     <h3>Cadastre-se</h3>
 
     <div class="form-group">
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" placeholder="nome completo…">
-       <div class="errorNome" id="erroNome"></div>
-        </div>
+      <input type="text" id="nome" name="nome" placeholder="Nome completo…">
+      <div class="error" id="erroNome"></div>
     </div>
 
     <div class="form-group">
       <label for="data_nascimento">Data de Nascimento:</label>
       <input type="date" id="data_nascimento" name="data_nascimento">
+      <div class="error" id="erroDataNascimento"></div>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
+      <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+      <div class="error" id="erroEmail"></div>
     </div>
 
     <div class="form-group">
@@ -42,6 +56,7 @@
       <label for="js">
         <input type="checkbox" id="js" name="habilidades" value="JS"> JavaScript
       </label>
+      <div class="error" id="erroHabilidades"></div>
     </div>
 
     <div class="form-group">
@@ -53,18 +68,20 @@
         <option value="jp">Japão</option>
         <option value="Kor">Coreia do Sul</option>
       </select>
+      <div class="error" id="erroPais"></div>
     </div>
 
     <div class="form-group">
       <label for="comentarios">Comentários:</label><br>
-      <textarea id="comentarios" name="comentarios"></textarea>
+      <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
+      <div class="error" id="erroComentarios"></div>
     </div>
 
     <div class="form-group">
       <button type="submit">Enviar</button>
     </div>
   </form>
-<!--Parte de Java Script--->
+
   <script>
     function processar_formulario() {
       // Obter os dados dos campos do formulário
@@ -73,37 +90,81 @@
       let email = document.querySelector("#email").value;
       let comentarios = document.querySelector("#comentarios").value;
       let pais = document.querySelector("#pais").value;
-      let errorNome = document.querySelectorAll( "errorNome");
 
-    let nome = document.querySelector('nome').value;
-            if (nome.valeu== '') {
-                setCustomValidity('erroNome', 'Nome não pode estar vazio.');
-            }
+      // Limpar as mensagens de erro anteriores
+      document.getElementById("erroNome").textContent = '';
+      document.getElementById("erroDataNascimento").textContent = '';
+      document.getElementById("erroEmail").textContent = '';
+      document.getElementById("erroHabilidades").textContent = '';
+      document.getElementById("erroPais").textContent = '';
+      document.getElementById("erroComentarios").textContent = '';
+
+      let isValid = true;
+
+      // Validar Nome
+      if (nome.trim() === '') {
+        document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
+        isValid = false;
+      } else if (nome.length < 2) {
+        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 2 caracteres.';
+        isValid = false;
+      }
+
+      // Validar Data de Nascimento
+      if (dataNascimento === '') {
+        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
+        isValid = false;
+      }
+
+      // Validar Email
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (email.trim() === '') {
+        document.getElementById("erroEmail").textContent = 'O e-mail é obrigatório.';
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("erroEmail").textContent = 'Por favor, insira um e-mail válido.';
+        isValid = false;
+      }
+
+      // Validar Habilidades
+      let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
+      if (habilidades.length === 0) {
+        document.getElementById("erroHabilidades").textContent = 'Por favor, selecione ao menos uma habilidade.';
+        isValid = false;
+      }
+
+      // Validar País
+      if (pais === '') {
+        document.getElementById("erroPais").textContent = 'O país é obrigatório.';
+        isValid = false;
+      }
+
+      // Validar Comentários
+      if (comentarios.trim() === '') {
+        document.getElementById("erroComentarios").textContent = 'Os comentários são obrigatórios.';
+        isValid = false;
+      }
+
+      // Se o formulário for válido, exibe o alerta de sucesso
+      if (isValid) {
+        alert("Formulário enviado com sucesso!");
+      }
+
+      // Retorna falso para impedir o envio real do formulário durante os testes
+      return isValid;
+    }
+  </script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+  <script>
+    new FroalaEditor('textarea');
+  </script>
 
 
 
- 
-        
- 
 
 
-//indexOf() é usado para encontrar a posição de um determinado caractere ou sequência de caracteres dentro de uma string.
-//endsWith() é usado para verificar se uma string termina com uma determinada sequência de caracteres.
-
-            return false;  // Previne o envio real do formulário para testes
-        }
-    
-
-
-    <!--froala-->
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
-        type="text/css" />
-    <script>
-        new FroalaEditor
-            ('textarea');
-    </script>
 </body>
 
 </html>
