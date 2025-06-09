@@ -72,11 +72,10 @@
 
   <script>
     function processar_formulario() {
-      // Obtem os dados dos campos do formulário
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
       let email = document.querySelector("#email").value;
-      let comentarios = document.querySelector("#comentarios").value;  // Comentários não tem validação
+      let comentarios = document.querySelector("#comentarios").value;
       let pais = document.querySelector("#pais").value;
 
       // Limpa as mensagens de erro anteriores
@@ -85,11 +84,11 @@
       document.getElementById("erroEmail").textContent = '';
       document.getElementById("erroHabilidades").textContent = '';
       document.getElementById("erroPais").textContent = '';
-      document.getElementById("erroComentarios").textContent = '';  // Limpa erro de comentários
+      document.getElementById("erroComentarios").textContent = '';
 
       let isValid = true;
 
-       // Valida o Nome (mínimo de 3 caracteres)
+      // Valida o Nome
       if (nome.trim() === '') {
         document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
         isValid = false;
@@ -98,33 +97,32 @@
         isValid = false;
       }
 
-// Valida a Data de Nascimento (não pode ser a data de hoje)
-if (dataNascimento === '') {
-    document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
-    isValid = false;
-} else {
-    const hoje = new Date(); // Data de hoje
-    hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas a data
-
-    const dataInformada = new Date(dataNascimento); // Data fornecida pelo usuário
-
-    // Calcula a data limite (um ano atrás)
-    const umAnoAtras = new Date();
-    umAnoAtras.setFullYear(hoje.getFullYear() - 1); // Um ano atrás a partir de hoje
-    umAnoAtras.setHours(0, 0, 0, 0); // Zera as horas da data limite
-
-    // Verifica se a data informada é a mesma do dia de hoje
-    if (dataInformada.getTime() === hoje.getTime()) {
-        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser o dia de hoje.';
+      // Valida a Data de Nascimento
+      if (dataNascimento === '') {
+        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
         isValid = false;
-    }
-    // Verifica se a data informada é no futuro ou se é mais de um ano atrás
-    else if (dataInformada > hoje || dataInformada < umAnoAtras) {
-        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento deve ser de até um ano atrás e não pode ser a data de hoje.';
-        isValid = false;
-    }
-}
+      } else {
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas a data
 
+        const dataInformada = new Date(dataNascimento);
+
+        // Calcula a data limite de um ano atrás
+        const umAnoAtras = new Date();
+        umAnoAtras.setFullYear(hoje.getFullYear() - 1);
+        umAnoAtras.setHours(0, 0, 0, 0); // Zera as horas da data limite
+
+        // Verifica se a data informada é o mesmo dia de hoje
+        if (dataInformada.getTime() === hoje.getTime()) {
+          document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser a data de hoje.';
+          isValid = false;
+        }
+        // Verifica se a data informada é no futuro ou mais de um ano atrás
+        else if (dataInformada > hoje || dataInformada < umAnoAtras) {
+          document.getElementById("erroDataNascimento").textContent = 'A data de nascimento deve ser de até um ano atrás e não pode ser a data de hoje.';
+          isValid = false;
+        }
+      }
 
       // Valida o Email
       let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
