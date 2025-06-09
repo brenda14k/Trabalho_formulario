@@ -62,7 +62,6 @@
     <div class="form-group">
       <label for="comentarios">Comentários:</label><br>
       <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
-      <!-- A validação de comentários foi removida -->
       <div class="error" id="erroComentarios"></div>
     </div>
 
@@ -77,7 +76,7 @@
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
       let email = document.querySelector("#email").value;
-      let comentarios = document.querySelector("#comentarios").value;  // Não há mais validação para comentários
+      let comentarios = document.querySelector("#comentarios").value;  // Comentários não tem validação
       let pais = document.querySelector("#pais").value;
 
       // Limpa as mensagens de erro anteriores
@@ -86,16 +85,16 @@
       document.getElementById("erroEmail").textContent = '';
       document.getElementById("erroHabilidades").textContent = '';
       document.getElementById("erroPais").textContent = '';
-      document.getElementById("erroComentarios").textContent = '';  // Limpa erro de comentários, caso apareça
+      document.getElementById("erroComentarios").textContent = '';  // Limpa erro de comentários
 
       let isValid = true;
 
-      // Valida o Nome (mínimo de 2 caracteres)
+      // Valida o Nome (mínimo de 3 caracteres)
       if (nome.trim() === '') {
         document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
         isValid = false;
-      } else if (nome.length < 2) {
-        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 2 caracteres.';
+      } else if (nome.length < 3) {
+        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 3 caracteres.';
         isValid = false;
       }
 
@@ -106,6 +105,7 @@
       } else {
         const hoje = new Date();
         const dataInformada = new Date(dataNascimento);
+        // Verifica se a data é maior ou igual à data de hoje
         if (dataInformada >= hoje) {
           document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser hoje ou no futuro.';
           isValid = false;
@@ -154,4 +154,3 @@
 </body>
 
 </html>
-
