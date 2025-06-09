@@ -41,7 +41,8 @@ form .form-group {
 }
 
 /* Cria um estilo para os labels, menos os que tiverem a propriedade "for" com os valores abaixo */
-label:not([for="html"], [for="css"], [for="javascript"], [for="php"]) {
+
+    label:not([for="html"], [for="css"], [for="javascript"], [for="php"]) {
     display: block;
     margin-bottom: 8px;
 }
