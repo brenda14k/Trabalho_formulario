@@ -1,6 +1,5 @@
 <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -9,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulário de Exemplo</title>
   <link rel="stylesheet" href="style.css">
- 
 </head>
 
 <body>
@@ -64,6 +62,7 @@
     <div class="form-group">
       <label for="comentarios">Comentários:</label><br>
       <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
+      <!-- A validação de comentários foi removida -->
       <div class="error" id="erroComentarios"></div>
     </div>
 
@@ -78,7 +77,7 @@
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
       let email = document.querySelector("#email").value;
-      let comentarios = document.querySelector("#comentarios").value;
+      let comentarios = document.querySelector("#comentarios").value;  // Não há mais validação para comentários
       let pais = document.querySelector("#pais").value;
 
       // Limpa as mensagens de erro anteriores
@@ -87,27 +86,34 @@
       document.getElementById("erroEmail").textContent = '';
       document.getElementById("erroHabilidades").textContent = '';
       document.getElementById("erroPais").textContent = '';
-      document.getElementById("erroComentarios").textContent = '';
+      document.getElementById("erroComentarios").textContent = '';  // Limpa erro de comentários, caso apareça
 
       let isValid = true;
 
-      // Valida o Nome
+      // Valida o Nome (mínimo de 2 caracteres)
       if (nome.trim() === '') {
         document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
         isValid = false;
-      } else if (nome.length < 3) {
-        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 3 caracteres.';
+      } else if (nome.length < 2) {
+        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 2 caracteres.';
         isValid = false;
       }
 
-      // Validar Data de Nascimento
+      // Validar Data de Nascimento (não pode ser a data de hoje)
       if (dataNascimento === '') {
         document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
         isValid = false;
+      } else {
+        const hoje = new Date();
+        const dataInformada = new Date(dataNascimento);
+        if (dataInformada >= hoje) {
+          document.getElementById("erroDataNascimento").textContent = 'A data de nascimento não pode ser hoje ou no futuro.';
+          isValid = false;
+        }
       }
 
       // Valida o Email
-      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;/* só aceita se tiver um @*
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
       if (email.trim() === '') {
         document.getElementById("erroEmail").textContent = 'O e-mail é obrigatório.';
         isValid = false;
@@ -119,8 +125,6 @@
       // Valida as Habilidades
       let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
       if (habilidades.length === 0) {
-         document.getElementById("erroHabilibades").textContent = 'Esse campo é obrigatório.';
-        <br>
         document.getElementById("erroHabilidades").textContent = 'Por favor, selecione ao menos uma habilidade.';
         isValid = false;
       }
@@ -131,8 +135,7 @@
         isValid = false;
       }
 
-     
-      // formulário válido
+      // Se o formulário estiver válido, exibe a mensagem de sucesso
       if (isValid) {
         alert("Formulário enviado com sucesso!");
       }
@@ -148,10 +151,7 @@
     new FroalaEditor('textarea');
   </script>
 
-
-
-
-
 </body>
 
 </html>
+
