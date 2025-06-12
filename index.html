@@ -165,37 +165,46 @@
 
       return isValid;
     }
-document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () {
   const telefoneInput = document.getElementById('telefone');
 
   telefoneInput.addEventListener('input', function () {
     let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-    // Limita o tamanho máximo para 13 (2 país + 2 DDD + 9 número)
-    if (valor.length > 13) valor = valor.slice(0, 13);
+    if (valor.length > 13) valor = valor.slice(0, 13); // Limite max 13 dígitos
 
     let formatado = '';
 
-    if (valor.length > 0) formatado += '+' + valor.substring(0, 2);               // +55
-    if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')';        // (45)
+    if (valor.length > 0) formatado += '+' + valor.substring(0, 2);      // +55
+    if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')'; // (45)
 
-    // Verifica se o número tem 9 dígitos (celular)
-    if (valor.length > 4) {
-      let numerosRestantes = valor.substring(4);
-      if (numerosRestantes.length > 8) {
-        // Número com 9 dígitos: 5 + 4 (ex: 99999-9999)
-        formatado += ' ' + numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 9);
-      } else {
-        // Número com 8 dígitos: 4 + 4 (ex: 9999-9999)
-        formatado += ' ' + numerosRestantes.substring(0, 4) + '-' + numerosRestantes.substring(4, 8);
+    let numerosRestantes = valor.substring(4);
+
+    if (numerosRestantes.length > 0) {
+      if (numerosRestantes.length <= 4) {
+        // Até 4 dígitos - só mostra os números, sem hífen
+        formatado += ' ' + numerosRestantes;
+      } else if (numerosRestantes.length === 5) {
+        // 5 dígitos - exibe todos sem hífen ainda (ex: 99999)
+        formatado += ' ' + numerosRestantes;
+      } else if (numerosRestantes.length > 5) {
+        // Mais que 5 dígitos - aplica hífen no lugar certo
+        if (numerosRestantes.length === 9) {
+          // Celular com 9 dígitos (ex: 99999-9999)
+          formatado += ' ' + numerosRestantes.substring(0,5) + '-' + numerosRestantes.substring(5,9);
+        } else {
+          // Número com 8 dígitos (ex: 9999-9999)
+          formatado += ' ' + numerosRestantes.substring(0,4) + '-' + numerosRestantes.substring(4,8);
+        }
       }
     }
 
     telefoneInput.value = formatado;
   });
 });
-        </script>
-      
+
+  </script>
+      //*const msg aparece a mensagem tanto para o usuario quanto para o programador*//
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
         <script>
