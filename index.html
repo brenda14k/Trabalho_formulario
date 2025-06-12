@@ -172,15 +172,25 @@ document.addEventListener('DOMContentLoaded', function () {
   telefoneInput.addEventListener('input', function () {
     let valor = telefoneInput.value.replace(/\D/g, ''); // remove tudo que não for número
 
-    // Limita a 13 dígitos: 2 do código do país, 2 do DDD, 9 do número
+    // Limita a 13 dígitos: 2 do país, 2 do DDD, 9 do número
     if (valor.length > 13) valor = valor.slice(0, 13);
 
     let formatado = '';
 
-    if (valor.length > 0) formatado += '+' + valor.substring(0, 2);               // +xx
-    if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')';        // (xx)
-    if (valor.length >= 5) formatado += ' ' + valor.substring(4, 9);               // xxxxx
-    if (valor.length >= 10) formatado += '-' + valor.substring(9, 13);             // -xxxx
+    if (valor.length > 0) {
+      formatado += '+' + valor.substring(0, 2); // +xx
+    }
+    if (valor.length >= 3) {
+      formatado += ' (' + valor.substring(2, 4) + ')'; // (xx)
+    }
+    if (valor.length >= 5) {
+      // parte do número principal, 5 primeiros dígitos do telefone
+      formatado += ' ' + valor.substring(4, 9);
+    }
+    if (valor.length >= 10) {
+      // hífen e últimos 4 dígitos
+      formatado += '-' + valor.substring(9, 13);
+    }
 
     telefoneInput.value = formatado;
   });
