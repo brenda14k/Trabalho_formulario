@@ -146,25 +146,27 @@
 
       return isValid;
     }
+document.addEventListener('DOMContentLoaded', function () {
+  const telefoneInput = document.getElementById('telefone');
 
-    // Máscara para telefone
-    document.addEventListener('DOMContentLoaded', function () {
-      const telefoneInput = document.getElementById('telefone');
+  telefoneInput.addEventListener('input', function () {
+    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-      telefoneInput.addEventListener('input', function () {
-        let valor = telefoneInput.value.replace(/\D/g, '');
+    // Limita a 13 dígitos: 2 do país, 2 do DDD e 9 do número
+    if (valor.length > 13) valor = valor.slice(0, 13);
 
-        if (valor.length > 13) valor = valor.slice(0, 13);
+    let formatado = '';
 
-        let formatado = '';
-        if (valor.length > 0) formatado += '+' + valor.substring(0, 2);
-        if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')';
-        if (valor.length >= 5) formatado += ' ' + valor.substring(4, 9);
-        if (valor.length >= 10) formatado += '-' + valor.substring(9, 12);
+    if (valor.length >= 1) formatado += '+' + valor.substring(0, 2);               // +55
+    if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')';        // (11)
+    if (valor.length >= 5) formatado += ' ' + valor.substring(4, 9);               // 91234
+    if (valor.length >= 10) formatado += '-' + valor.substring(9, 12);             // -567
 
-        telefoneInput.value = formatado;
-      });
-    });
+    telefoneInput.value = formatado; //*document.addEventListener É uma forma de dizer ao navegador para “ficar esperando” um certo evento acontecer e, quando isso ocorrer, executar uma função (código).*//
+        //*document.getElementById
+É uma maneira de pegar um pedaço da página (um elemento) que tem um nome especial chamado id.*//
+  });
+});
   </script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
