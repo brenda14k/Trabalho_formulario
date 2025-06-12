@@ -165,13 +165,13 @@
 
       return isValid;
     }
-        document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   const telefoneInput = document.getElementById('telefone');
 
   telefoneInput.addEventListener('input', function () {
-    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+    let valor = telefoneInput.value.replace(/\D/g, ''); // remove tudo que não for número
 
-    if (valor.length > 13) valor = valor.slice(0, 13); // Limite max 13 dígitos
+    if (valor.length > 13) valor = valor.slice(0, 13); // limite max 13 dígitos
 
     let formatado = '';
 
@@ -180,28 +180,32 @@
 
     let numerosRestantes = valor.substring(4);
 
-    if (numerosRestantes.length > 0) {
-      if (numerosRestantes.length <= 4) {
-        // Até 4 dígitos - só mostra os números, sem hífen
+    if (numerosRestantes.length > 0 && numerosRestantes.length <= 4) {
+      // 1 a 4 dígitos, sem hífen
+      formatado += ' ' + numerosRestantes;
+    } else if (numerosRestantes.length === 5) {
+      // 5 dígitos, ainda sem hífen
+      formatado += ' ' + numerosRestantes;
+    } else if (numerosRestantes.length >= 6) {
+      // 6 ou mais dígitos - coloca hífen só quando possível
+
+      if (numerosRestantes.length === 8) {
+        // número fixo: 9999-9999
+        formatado += ' ' + numerosRestantes.substring(0, 4) + '-' + numerosRestantes.substring(4, 8);
+      } else if (numerosRestantes.length >= 9) {
+        // número celular: 99999-9999
+        formatado += ' ' + numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 9);
+      } else {
+        // caso a pessoa esteja digitando menos que 8 ou 9, mas mais que 5 dígitos
+        // mostra tudo sem hífen (pra evitar hífen cedo demais)
         formatado += ' ' + numerosRestantes;
-      } else if (numerosRestantes.length === 5) {
-        // 5 dígitos - exibe todos sem hífen ainda (ex: 99999)
-        formatado += ' ' + numerosRestantes;
-      } else if (numerosRestantes.length > 5) {
-        // Mais que 5 dígitos - aplica hífen no lugar certo
-        if (numerosRestantes.length === 9) {
-          // Celular com 9 dígitos (ex: 99999-9999)
-          formatado += ' ' + numerosRestantes.substring(0,5) + '-' + numerosRestantes.substring(5,9);
-        } else {
-          // Número com 8 dígitos (ex: 9999-9999)
-          formatado += ' ' + numerosRestantes.substring(0,4) + '-' + numerosRestantes.substring(4,8);
-        }
       }
     }
 
     telefoneInput.value = formatado;
   });
 });
+
 
   </script>
       //*const msg aparece a mensagem tanto para o usuario quanto para o programador*//
