@@ -169,35 +169,35 @@ document.addEventListener('DOMContentLoaded', function () {
   const telefoneInput = document.getElementById('telefone');
 
   telefoneInput.addEventListener('input', function () {
-    let valor = telefoneInput.value.replace(/\D/g, ''); // remove tudo que não for número
+    let valor = telefoneInput.value.replace(/\D/g, ''); // tira tudo que não é número
 
-    if (valor.length > 13) valor = valor.slice(0, 13); // limite max 13 dígitos: 2+2+9
+    // Limita a 11 dígitos (DD + número celular)
+    if (valor.length > 11) valor = valor.slice(0, 11);
 
     let formatado = '';
 
-    if (valor.length > 0) formatado += '+' + valor.substring(0, 2);      // +55
-    if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')'; // (45)
+    if (valor.length > 0) formatado += '+55'; // fixo +55
+    if (valor.length > 0) formatado += ' (';
 
-    let numerosRestantes = valor.substring(4);
+    if (valor.length >= 2) {
+      formatado += valor.substring(0, 2) + ') ';
+    } else if (valor.length < 2) {
+      formatado += valor;
+    }
 
-    if (numerosRestantes.length <= 4) {
-      // até 4 números, sem hífen
-      formatado += ' ' + numerosRestantes;
-    } else if (numerosRestantes.length > 4) {
-      // a partir do 5º número, adiciona hífen após o 4º dígito
-      let parte1 = numerosRestantes.substring(0, 4);
-      let parte2 = numerosRestantes.substring(4, 9); // pega até 5 dígitos restantes
+    let numerosRestantes = valor.substring(2);
 
-      formatado += ' ' + parte1 + '-' + parte2;
+    if (numerosRestantes.length <= 5) {
+      formatado += numerosRestantes;
+    } else {
+      // hífen depois do 5º número
+      formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5);
     }
 
     telefoneInput.value = formatado;
   });
 });
 
-
-
-  </script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
         <script>
@@ -208,6 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
       
       </html>
       
-      // coissas novas
-//const msg aparece a mensagem tanto para o usuario quanto para o programador
+      <--! coissas novas-->
+<--!const msg aparece a mensagem tanto para o usuario quanto para o programador--->
 
