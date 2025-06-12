@@ -1,157 +1,174 @@
       <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
-      <!DOCTYPE html>
-      <html lang="pt-BR">
-      
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Formulário de Exemplo</title>
-        <link rel="stylesheet" href="style.css">
-      </head>
-      
-      <body>
-      
-        <form id="formCadastro" onsubmit="return processar_formulario()">
-          <h3>Cadastre-se</h3>
-      
-          <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Nome completo…" value="">
-            <div class="error" id="erroNome"></div>
-          </div>
-      
-          <div class="form-group">
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="date" id="data_nascimento" name="data_nascimento">
-            <div class="error" id="erroDataNascimento"></div>
-          </div>
-      
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
-            <div class="error" id="erroEmail"></div>
-          </div>
+     elefone:</label>
+ 
+         
+        
+    <!DOCTYPE html>
+<html lang="pt-BR">
 
-                <div class="form-group">
-            <label for="telefone">Telefone:</label>
-            <input type="date" id="telefone" name="telefone">
-            <div class="error" id="erroTelefone"></div>
-          </div>
-      
-                <div class="form-group">
-                  <label>Habilidades:</label>
-                  <label for="html">
-                    <input type="checkbox" id="html" name="habilidades" value="HTML"> HTML
-                        </label>
-                        <label for="css">
-                    <input type="checkbox" id="css" name="habilidades" value="CSS"> CSS
-                  </label>
-                  <label for="js">
-                    <input type="checkbox" id="js" name="habilidades" value="JS"> JavaScript
-                  </label>
-                  <div class="error" id="erroHabilidades"></div>
-                </div>
-            
-          <div class="form-group">
-            <label for="pais">País:</label>
-            <select id="pais" name="pais">
-                    <option value=""></option>
-                    <option value="Ar">Argentina</option>
-                    <option value="Br">Brasil</option>
-                    <option value="Ca">Canadá</option>
-                   <option value="Ch">Chile</option>
-                    <option value="Kor">Coreia do Sul</option>
-                  <option value="Ecu">Equador</option>
-                    <option value="Jp">Japão</option>
-                    <option value="Pr">Paraguai</option>
-            </select>
-            <div class="error" id="erroPais"></div>
-          </div>
-      
-          <div class="form-group">
-            <label for="comentarios">Comentários:</label><br>
-            <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
-            <div class="error" id="erroComentarios"></div>
-          </div>
-      
-          <div class="form-group">
-            <button type="submit">Enviar</button>
-          </div>
-        </form>
-      
-        <script>
-          function processar_formulario() {
-            let nome = document.querySelector("#nome").value;
-            let dataNascimento = document.querySelector("#data_nascimento").value;
-            let email = document.querySelector("#email").value;
-            let telefone = document.querySelector("#telefone").value;
-            let comentarios = document.querySelector("#comentarios").value;
-            let pais = document.querySelector("#pais").value;
-      
-            // Limpa as mensagens de erro anteriores
-            document.getElementById("erroNome").textContent = '';
-            document.getElementById("erroDataNascimento").textContent = '';
-            document.getElementById("erroEmail").textContent = '';
-             document.getElementById("erroTelefone").textContent = '';
-            document.getElementById("erroHabilidades").textContent = '';
-            document.getElementById("erroPais").textContent = '';
-            document.getElementById("erroComentarios").textContent = '';
-      
-            let isValid = true;
-      
-            // Valida o Nome
-            if (nome.trim() === '') {
-              document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
-              isValid = false;
-            } else if (nome.length < 3) {
-              document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 3 caracteres.';
-              isValid = false;
-            }
-      
-            // Valida a Data de Nascimento
-            if (dataNascimento === '') {
-              document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
-              isValid = false;
-            }
-      
-            // Valida o Email
-            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (email.trim() === '') {
-              document.getElementById("erroEmail").textContent = 'O e-mail é obrigatório.';
-              isValid = false;
-            } else if (!emailPattern.test(email)) {
-              document.getElementById("erroEmail").textContent = 'Por favor, insira um e-mail válido.';
-              isValid = false;
-            }
-              //valida o Telefone
-                 if (telefone.trim() === '') {
-              document.getElementById("erroTelefone").textContent = 'O telefone é obrigatório.';
-              isValid = false;
-            }
-                
-            // Valida as Habilidades
-            let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
-            if (habilidades.length === 0) {
-              document.getElementById("erroHabilidades").textContent = 'Por favor, selecione ao menos uma habilidade.';
-              isValid = false;
-            }
-      
-            // Valida o País
-            if (pais === '') {
-              document.getElementById("erroPais").textContent = 'O país é obrigatório.';
-              isValid = false;
-            }
-      
-            // Se o formulário estiver válido, exibe a mensagem de sucesso
-            if (isValid) {
-              alert("Formulário enviado com sucesso!");
-            }
-      
-            // Retorna falso para impedir o envio real do formulário durante os testes
-            return isValid;
-          }
-        </script>
-      
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Exemplo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <form id="formCadastro" onsubmit="return processar_formulario()">
+    <h3>Cadastre-se</h3>
+
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="Nome completo…" value="">
+      <div class="error" id="erroNome"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="data_nascimento">Data de Nascimento:</label>
+      <input type="date" id="data_nascimento" name="data_nascimento">
+      <div class="error" id="erroDataNascimento"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+      <div class="error" id="erroEmail"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone:</label>
+      <input type="tel" id="telefone" name="telefone" placeholder="+55 (11) 91234-567" maxlength="17">
+      <div class="error" id="erroTelefone"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Habilidades:</label>
+      <label for="html">
+        <input type="checkbox" id="html" name="habilidades" value="HTML"> HTML
+      </label>
+      <label for="css">
+        <input type="checkbox" id="css" name="habilidades" value="CSS"> CSS
+      </label>
+      <label for="js">
+        <input type="checkbox" id="js" name="habilidades" value="JS"> JavaScript
+      </label>
+      <div class="error" id="erroHabilidades"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="pais">País:</label>
+      <select id="pais" name="pais">
+        <option value=""></option>
+        <option value="Ar">Argentina</option>
+        <option value="Br">Brasil</option>
+        <option value="Ca">Canadá</option>
+        <option value="Ch">Chile</option>
+        <option value="Kor">Coreia do Sul</option>
+        <option value="Ecu">Equador</option>
+        <option value="Jp">Japão</option>
+        <option value="Pr">Paraguai</option>
+      </select>
+      <div class="error" id="erroPais"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="comentarios">Comentários:</label><br>
+      <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
+      <div class="error" id="erroComentarios"></div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit">Enviar</button>
+    </div>
+  </form>
+
+  <script>
+    function processar_formulario() {
+      let nome = document.querySelector("#nome").value;
+      let dataNascimento = document.querySelector("#data_nascimento").value;
+      let email = document.querySelector("#email").value;
+      let telefone = document.querySelector("#telefone").value;
+      let comentarios = document.querySelector("#comentarios").value;
+      let pais = document.querySelector("#pais").value;
+
+      document.getElementById("erroNome").textContent = '';
+      document.getElementById("erroDataNascimento").textContent = '';
+      document.getElementById("erroEmail").textContent = '';
+      document.getElementById("erroTelefone").textContent = '';
+      document.getElementById("erroHabilidades").textContent = '';
+      document.getElementById("erroPais").textContent = '';
+      document.getElementById("erroComentarios").textContent = '';
+
+      let isValid = true;
+
+      if (nome.trim() === '') {
+        document.getElementById("erroNome").textContent = 'O nome é obrigatório.';
+        isValid = false;
+      } else if (nome.length < 3) {
+        document.getElementById("erroNome").textContent = 'O nome deve ter pelo menos 3 caracteres.';
+        isValid = false;
+      }
+
+      if (dataNascimento === '') {
+        document.getElementById("erroDataNascimento").textContent = 'A data de nascimento é obrigatória.';
+        isValid = false;
+      }
+
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (email.trim() === '') {
+        document.getElementById("erroEmail").textContent = 'O e-mail é obrigatório.';
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("erroEmail").textContent = 'Por favor, insira um e-mail válido.';
+        isValid = false;
+      }
+
+      if (telefone.trim() === '') {
+        document.getElementById("erroTelefone").textContent = 'O telefone é obrigatório.';
+        isValid = false;
+      } else if (telefone.length !== 17) {
+        document.getElementById("erroTelefone").textContent = 'Formato inválido. Use +XX (XX) XXXXX-XXX.';
+        isValid = false;
+      }
+
+      let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
+      if (habilidades.length === 0) {
+        document.getElementById("erroHabilidades").textContent = 'Por favor, selecione ao menos uma habilidade.';
+        isValid = false;
+      }
+
+      if (pais === '') {
+        document.getElementById("erroPais").textContent = 'O país é obrigatório.';
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert("Formulário enviado com sucesso!");
+      }
+
+      return isValid;
+    }
+
+    // Máscara para telefone
+    document.addEventListener('DOMContentLoaded', function () {
+      const telefoneInput = document.getElementById('telefone');
+
+      telefoneInput.addEventListener('input', function () {
+        let valor = telefoneInput.value.replace(/\D/g, '');
+
+        if (valor.length > 13) valor = valor.slice(0, 13);
+
+        let formatado = '';
+        if (valor.length > 0) formatado += '+' + valor.substring(0, 2);
+        if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')';
+        if (valor.length >= 5) formatado += ' ' + valor.substring(4, 9);
+        if (valor.length >= 10) formatado += '-' + valor.substring(9, 12);
+
+        telefoneInput.value = formatado;
+      });
+    });
+  </script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
         <script>
