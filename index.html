@@ -35,13 +35,8 @@
 
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input
-        type="tel"
-        id="telefone"
-        name="telefone"
-        placeholder="+xx (xx) xxxxx-xxxx"
-        maxlength="17"
-      />
+      <input type="tel" id="telefone" name="telefone"placeholder="+xx (xx) xxxxx-xxxx"
+        maxlength="17" />
       <div class="error" id="erroTelefone"></div>
     </div>
 
@@ -171,24 +166,26 @@
       return isValid;
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const telefoneInput = document.getElementById("telefone");
+document.addEventListener('DOMContentLoaded', function () {
+  const telefoneInput = document.getElementById('telefone');
 
-      telefoneInput.addEventListener("input", function () {
-        let valor = telefoneInput.value.replace(/\D/g, ""); // Remove tudo que não for número
+  telefoneInput.addEventListener('input', function () {
+    let valor = telefoneInput.value.replace(/\D/g, ''); // remove tudo que não for número
 
-        if (valor.length > 13) valor = valor.slice(0, 13); // Limita a 13 dígitos
+    // Limita a 13 dígitos: 2 do código do país, 2 do DDD, 9 do número
+    if (valor.length > 13) valor = valor.slice(0, 13);
 
-        let formatado = "";
+    let formatado = '';
 
-        if (valor.length > 0) formatado += "+" + valor.substring(0, 2); // +55
-        if (valor.length >= 3) formatado += " (" + valor.substring(2, 4) + ")"; // (11)
-        if (valor.length >= 5) formatado += " " + valor.substring(4, 9); // 91234
-        if (valor.length >= 10) formatado += "-" + valor.substring(9, 13); // -5678
+    if (valor.length > 0) formatado += '+' + valor.substring(0, 2);               // +xx
+    if (valor.length >= 3) formatado += ' (' + valor.substring(2, 4) + ')';        // (xx)
+    if (valor.length >= 5) formatado += ' ' + valor.substring(4, 9);               // xxxxx
+    if (valor.length >= 10) formatado += '-' + valor.substring(9, 13);             // -xxxx
 
-        telefoneInput.value = formatado;
-      });
-    });
+    telefoneInput.value = formatado;
+  });
+});
+
   
       
         </script>
