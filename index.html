@@ -169,32 +169,40 @@
 document.addEventListener('DOMContentLoaded', function () {
   const telefoneInput = document.getElementById('telefone');
 
-  telefoneInput.addEventListener('input', function () {
-    let valor = telefoneInput.value.replace(/\D/g, ''); // remove tudo que não for número
+  telefoneInput.addEventListener('input', function (e) {
+    let cursorPos = telefoneInput.selectionStart;
+    let valorAntigo = telefoneInput.value;
 
-    // Limita a 13 dígitos: 2 do país, 2 do DDD, 9 do número
+    // Remove tudo que não for número
+    let valor = valorAntigo.replace(/\D/g, '');
+
+    // Limita a 13 dígitos (xx + xx + xxxxx-xxxx)
     if (valor.length > 13) valor = valor.slice(0, 13);
 
+    // Formata o telefone
     let formatado = '';
 
     if (valor.length > 0) {
-      formatado += '+' + valor.substring(0, 2); // +xx
+      formatado += '+' + valor.substring(0, 2);
     }
     if (valor.length >= 3) {
-      formatado += ' (' + valor.substring(2, 4) + ')'; // (xx)
+      formatado += ' (' + valor.substring(2, 4) + ')';
     }
     if (valor.length >= 5) {
-      // parte do número principal, 5 primeiros dígitos do telefone
       formatado += ' ' + valor.substring(4, 9);
     }
     if (valor.length >= 10) {
-      // hífen e últimos 4 dígitos
       formatado += '-' + valor.substring(9, 13);
     }
 
     telefoneInput.value = formatado;
+
+    // Ajusta o cursor para uma posição coerente
+    // (Simples: coloca no final. Pode ser melhorado para posição exata)
+    telefoneInput.selectionStart = telefoneInput.selectionEnd = telefoneInput.value.length;
   });
 });
+
 
   
       
