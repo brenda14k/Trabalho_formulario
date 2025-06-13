@@ -156,37 +156,46 @@
 
       return isValid;
     }
+document.addEventListener('DOMContentLoaded', function () {
+  const telefoneInput = document.getElementById('telefone');
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const telefoneInput = document.getElementById('telefone');
+  telefoneInput.addEventListener('input', function () {
+    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-      telefoneInput.addEventListener('input', function () {
-        let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+    // Limita a 11 dígitos (DDD + número celular)
+    if (valor.length > 11) valor = valor.slice(0, 11);
 
-        // Limita a 11 dígitos (DDD + número celular)
-        if (valor.length > 11) valor = valor.slice(0, 11);
+    let formatado = '';
 
-        let formatado = ''; // Inicializa a variável formatada
+    // Formatação do telefone
+    if (valor.length > 0) {
+      formatado = '(' + valor.substring(0, 2) + ') '; // Formato (XX)
+    }
+    if (valor.length > 2) {
+      formatado += valor.substring(2, 7); // Formato (XX) 99999
+    }
+    if (valor.length > 6) {
+      formatado += '-'; // Formato (XX) 99999-
+    }
+    if (valor.length > 6) {
+      formatado += valor.substring(7, 11); // Formato (XX) 99999-9999
+    }
 
-        // Formata o número de telefone
-        if (valor.length > 0) {
-          formatado = '(' + valor.substring(0, 2) + ') ' + valor.substring(2, 7); // Formato (XX) 99999
-        }
-        if (valor.length > 6) {
-          formatado += '-' + valor.substring(7, 11); // Formato (XX) 99999-9999
-        }
+    telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
+  });
 
-        telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-      });
+  telefoneInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Backspace') {
+      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+      telefoneInput.value = valor; // Atualiza o campo sem formatação
 
-      // Permite apagar os caracteres corretamente
-      telefoneInput.addEventListener('keydown', function (event) {
-        if (event.key === 'Backspace') {
-          let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-          telefoneInput.value = valor; // Permite que o usuário apague os números e símbolos
-        }
-      });
-    });
+      // Reaplica a formatação após apagar
+      setTimeout(function () {
+        telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
+      }, 0);
+    }
+  });
+});
   </script>
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
