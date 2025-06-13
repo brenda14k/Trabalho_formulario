@@ -198,9 +198,13 @@
       }
 
       
-      if (isValid) {
+       if (isValid) {
         alert("Formulário enviado com sucesso!");  // Aqui está o alert de sucesso
-        document.getElementById("formCadastro").reset();
+
+        // Limpar os campos do formulário após o alerta
+        setTimeout(function () {
+          document.getElementById("formCadastro").reset();  // Limpa os campos
+        }, 100);  // Delay de 100ms após o alerta (para garantir que o alert seja fechado primeiro)
       }
     }
 
