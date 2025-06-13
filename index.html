@@ -165,38 +165,41 @@
 
       return isValid;
     }
-document.addEventListener('DOMContentLoaded', function () {
-  const telefoneInput = document.getElementById('telefone');
 
-  telefoneInput.addEventListener('input', function () {
-    let valor = telefoneInput.value.replace(/\D/g, ''); // tira tudo que não é número
+  document.addEventListener('DOMContentLoaded', function () {
+    const telefoneInput = document.getElementById('telefone');
 
-    // Limita a 11 dígitos (DD + número celular)
-    if (valor.length > 11) valor = valor.slice(0, 11);
+    telefoneInput.addEventListener('input', function () {
+      let valor = telefoneInput.value.replace(/\D/g, ''); // tira tudo que não é número
 
-    let formatado = '';
+      // Limita a 11 dígitos (DD + número celular)
+      if (valor.length > 11) valor = valor.slice(0, 11);
 
-    if (valor.length > 0) formatado += '+55'; // fixo +55
-    if (valor.length > 0) formatado += ' (';
+      let formatado = '';
 
-    if (valor.length >= 2) {
-      formatado += valor.substring(0, 2) + ') ';
-    } else if (valor.length < 2) {
-      formatado += valor;
-    }
+      if (valor.length > 0) formatado += '+55'; // fixo +55
+      if (valor.length > 0) formatado += ' (';
 
-    let numerosRestantes = valor.substring(2);
+      if (valor.length >= 2) {
+        formatado += valor.substring(0, 2) + ') ';
+      } else if (valor.length < 2) {
+        formatado += valor;
+      }
 
-    if (numerosRestantes.length <= 5) {
-      formatado += numerosRestantes;
-    } else {
-      // hífen depois do 5º número
-      formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5);
-    }
+      let numerosRestantes = valor.substring(2);
 
-    telefoneInput.value = formatado;
+      if (numerosRestantes.length <= 5) {
+        formatado += numerosRestantes;
+      } else {
+        // hífen depois do 5º número
+        formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 9);
+      }
+
+      telefoneInput.value = formatado;
+    });
   });
-});
+</script>
+
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
