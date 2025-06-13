@@ -4,91 +4,263 @@
 
 
 
-<script>
-  function processar_formulario() {
-    let nome = document.querySelector("#nome").value;
-    let dataNascimento = document.querySelector("#data_nascimento").value;
-    let email = document.querySelector("#email").value;
-    let telefone = document.querySelector("#telefone").value;
-    let comentarios = document.querySelector("#comentarios").value;
-    let pais = document.querySelector("#pais").value;
-    let escolaridade = document.querySelector("#escolaridade").value;
-    let profissional = document.querySelector('input[name="profissional"]:checked');
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    document.getElementById("erroNome").textContent = "";
-    document.getElementById("erroDataNascimento").textContent = "";
-    document.getElementById("erroEmail").textContent = "";
-    document.getElementById("erroTelefone").textContent = "";
-    document.getElementById("erroHabilidades").textContent = "";
-    document.getElementById("erroPais").textContent = "";
-    document.getElementById("erroEscolaridade").textContent = "";
-    document.getElementById("erroProfissional").textContent = "";
-    document.getElementById("erroComentarios").textContent = "";
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulário de Exemplo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    let isValid = true;
+<body>
+  <form id="formCadastro" onsubmit="return processar_formulario()">
+    <h3>Cadastre-se</h3>
 
-    if (nome.trim() === "") {
-      document.getElementById("erroNome").textContent = "O nome é obrigatório.";
-      isValid = false;
-    } else if (nome.length < 3) {
-      document.getElementById("erroNome").textContent = "O nome deve ter pelo menos 3 caracteres.";
-      isValid = false;
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="Nome completo…" value="" />
+      <div class="error" id="erroNome"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="data_nascimento">Data de Nascimento:</label>
+      <input type="date" id="data_nascimento" name="data_nascimento" />
+      <div class="error" id="erroDataNascimento"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" />
+      <div class="error" id="erroEmail"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone:</label>
+      <input type="tel" id="telefone" name="telefone" placeholder="+XX (XX) XXXXX-XXXX" maxlength="19" />
+      <div class="error" id="erroTelefone"></div>
+    </div>
+        
+</div>
+    <div class="form-group">
+      <label for="pais">País:</label>
+      <select id="pais" name="pais">
+        <option value=""></option>
+        <option value="Ar">Argentina</option>
+        <option value="Br">Brasil</option>
+        <option value="Ca">Canadá</option>
+        <option value="Ch">Chile</option>
+        <option value="Kor">Coreia do Sul</option>
+        <option value="Ecu">Equador</option>
+        <option value="Jp">Japão</option>
+        <option value="Pr">Paraguai</option>
+      </select>
+          
+      <div class="error" id="erroPais"></div>
+    </div>
+
+          <div class="form-group">
+             <label for="escolaridade">Nível de escolaridade:</label>
+            <select id="escolaridade" name="escolaridade"> 
+            <option value=""></option>
+            <option value="fundamental_completo">Ensino Fundamental Completo</option>
+            <option value="fundamental_incompleto">Ensino Fundamental Incompleto</option>
+             <option value="medio_completo">Ensino Médio Completo</option>
+             <option value="medio_incompleto"">Ensino Médio Incompleto</option>
+             <option value="graduação">Graduação</option>
+             <option value="pós-graduação">Pós-graduação</option>
+             <option value="mestrado">Mestrado</option>
+             <option value="doutorado">Doutorado</option>
+                <div class="error" id="erroEscolaridade"></div>
+    </div>
+      </select>
+      
+    <div class="form-group">
+      <label>Habilidades:</label>
+      <label for="html">
+        <input type="checkbox" id="html" name="habilidades" value="HTML" /> HTML
+      </label>
+      <label for="css">
+        <input type="checkbox" id="css" name="habilidades" value="CSS" /> CSS
+      </label>
+      <label for="js">
+        <input type="checkbox" id="js" name="habilidades" value="JS" /> JavaScript
+      </label>
+      <div class="error" id="erroHabilidades"></div>
+    </div>
+      
+   <div class="form-group">
+      <label>Nível Profissional:</label>
+      <label for="junior">
+        <input type="radio" id="junior" name="profissional" value="Junior" /> Junior
+      </label>
+      <label for="pleno">
+        <input type="radio" id="pleno" name="profissional" value="Pleno" /> Pleno
+      </label>
+      <label for="senior">
+        <input type="radio" id="senior" name="profissional" value="Sênior" /> Sênior
+      </label>
+      <div class="error" id="erroProfissional"></div>
+    </div>
+    
+
+
+    <div class="form-group">
+      <label for="comentarios">Comentários:</label><br />
+      <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
+      <div class="error" id="erroComentarios"></div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit">Enviar</button>
+    </div>
+  </form>
+
+  <script>
+    function processar_formulario() {
+      let nome = document.querySelector("#nome").value;
+      let dataNascimento = document.querySelector("#data_nascimento").value;
+      let email = document.querySelector("#email").value;
+      let telefone = document.querySelector("#telefone").value;
+      let comentarios = document.querySelector("#comentarios").value;
+      let pais = document.querySelector("#pais").value;
+      let escolaridade = document.querySelector("#escolaridade").value;
+      let profissional = document.querySelector('input[name="profissional"]:checked');
+
+
+      document.getElementById("erroNome").textContent = "";
+      document.getElementById("erroDataNascimento").textContent = "";
+      document.getElementById("erroEmail").textContent = "";
+      document.getElementById("erroTelefone").textContent = "";
+      document.getElementById("erroHabilidades").textContent = "";
+      document.getElementById("erroPais").textContent = "";
+      document.getElementById("erroEscolaridade").textContent = "";
+      document.getElementById("erroProfisional").textContent = "";
+      document.getElementById("erroComentarios").textContent = "";
+
+      let isValid = true;
+
+      if (nome.trim() === "") {
+        const msg = "O nome é obrigatório.";
+        document.getElementById("erroNome").textContent = msg;
+        isValid = false;
+      } else if (nome.length < 3) {
+        const msg = "O nome deve ter pelo menos 3 caracteres.";
+        document.getElementById("erroNome").textContent = msg;
+        isValid = false;
+      }
+
+      if (dataNascimento === "") {
+        const msg = "A data de nascimento é obrigatória.";
+        document.getElementById("erroDataNascimento").textContent = msg;
+        isValid = false;
+      }
+
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (email.trim() === "") {
+        const msg = "O e-mail é obrigatório.";
+        document.getElementById("erroEmail").textContent = msg;
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        const msg = "Por favor, insira um e-mail válido.";
+        document.getElementById("erroEmail").textContent = msg;
+        isValid = false;
+      }
+
+      if (telefone.trim() === "") {
+        const msg = "O telefone é obrigatório.";
+        document.getElementById("erroTelefone").textContent = msg;
+        isValid = false;
+      } else if (telefone.length !== 19) { // 19 caracteres
+  const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
+  document.getElementById("erroTelefone").textContent = msg;
+  isValid = false;
+      }
+
+      let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
+      if (habilidades.length === 0) {
+        const msg = "Por favor, selecione ao menos uma habilidade.";
+        document.getElementById("erroHabilidades").textContent = msg;
+        isValid = false;
+      }
+
+      if (pais === "") {
+        const msg = "O país é obrigatório.";
+        document.getElementById("erroPais").textContent = msg;
+        isValid = false;
+      }
+          
+           if (escolaridade === "") {
+        const msg = "O Nivel de escolaridade é obrigatório.";
+        document.getElementById("erroEscolaridade").textContent = msg;
+        isValid = false;
+      }
+
+          if (!profissional) {
+        document.getElementById("erroProfissional").textContent = "O nível profissional é obrigatório.";
+        isValid = false;
+      }
+
+
+     if (isValid) {
+  alert("Formulário enviado com sucesso!");
+} else {
+  console.log(isValid);
     }
 
-    if (dataNascimento === "") {
-      document.getElementById("erroDataNascimento").textContent = "A data de nascimento é obrigatória.";
-      isValid = false;
-    }
+     document.addEventListener('DOMContentLoaded', function () {
+    const telefoneInput = document.getElementById('telefone');
 
-    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (email.trim() === "") {
-      document.getElementById("erroEmail").textContent = "O e-mail é obrigatório.";
-      isValid = false;
-    } else if (!emailPattern.test(email)) {
-      document.getElementById("erroEmail").textContent = "Por favor, insira um e-mail válido.";
-      isValid = false;
-    }
+    telefoneInput.addEventListener('input', function () {
+      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-    if (telefone.trim() === "") {
-      document.getElementById("erroTelefone").textContent = "O telefone é obrigatório.";
-      isValid = false;
-    } else if (telefone.length !== 19) {
-      document.getElementById("erroTelefone").textContent = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
-      isValid = false;
-    }
+      // Limita o número de caracteres a 19 (total de caracteres no formato "+XX (XX) XXXXX-XXXX")
+      if (valor.length > 19) {
+        valor = valor.substring(0, 19); // Limita a 15 caracteres numéricos
+      }
 
-    let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
-    if (habilidades.length === 0) {
-      document.getElementById("erroHabilidades").textContent = "Por favor, selecione ao menos uma habilidade.";
-      isValid = false;
-    }
+      // Se o valor começa com "+", mantemos e formamos a máscara corretamente
+      let formatado = '';
 
-    if (pais === "") {
-      document.getElementById("erroPais").textContent = "O país é obrigatório.";
-      isValid = false;
-    }
+      // Adiciona o "+" somente no início, caso não exista
+      if (valor.length > 0 && valor[0] !== '+') {
+        valor = '+' + valor; // Adiciona o "+" no início se não existir
+      }
 
-    if (escolaridade === "") {
-      document.getElementById("erroEscolaridade").textContent = "O nível de escolaridade é obrigatório.";
-      isValid = false;
-    }
+      // Formatação do telefone: "+XX (XX) XXXXX-XXXX"
+      if (valor.length > 1) {
+        formatado = valor.substring(0, 3); // Adiciona o "+XX"
+      }
+      if (valor.length > 3) {
+        formatado += ' (' + valor.substring(3, 5) + ') '; // Adiciona o "(XX)"
+      }
+      if (valor.length > 5) {
+        formatado += valor.substring(5, 10); // Adiciona o "XXXXX"
+      }
+      if (valor.length > 9) {
+        formatado += '-'; // Adiciona o "-"
+      }
+      if (valor.length > 10) {
+        formatado += valor.substring(10, 15); // Adiciona o "XXXX"
+      }
 
-    if (!profissional) {
-      document.getElementById("erroProfissional").textContent = "O nível profissional é obrigatório.";
-      isValid = false;
-    }
+      telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
+    });
 
-    if (isValid) {
-      alert("Formulário enviado com sucesso!");
-    } else {
-      console.log("Formulário inválido");
-    }
+    telefoneInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Backspace') {
+        let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+        telefoneInput.value = valor; // Atualiza o campo sem formatação
 
-    // Evitar o envio do formulário se não for válido
-    return isValid;
-  }
-</script>
-
+        // Reaplica a formatação após apagar
+        setTimeout(function () {
+          telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
+        }, 0);
+      }
+    });
+  });
+  </script>
 
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
