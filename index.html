@@ -1,7 +1,8 @@
       <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+
+   
+   <html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
@@ -154,53 +155,50 @@
 
       return isValid;
     }
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const telefoneInput = document.getElementById('telefone');
 
-    telefoneInput.addEventListener('input', function () {
-      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+    document.addEventListener('DOMContentLoaded', function () {
+      const telefoneInput = document.getElementById('telefone');
 
-      // Limita a 15 dígitos (incluindo o código do país)
-      if (valor.length > 15) valor = valor.slice(0, 15); 
-
-      let formatado = '';
-
-      // Adiciona o código de país dinâmico
-      if (valor.length > 0) {
-        let codigoPais = valor.substring(0, 2); // Código do país (2 dígitos)
-        formatado += '+' + codigoPais + ' '; // Adiciona o símbolo de '+' e o código do país
-        valor = valor.substring(2); // Remove o código do país para o próximo processamento
-      }
-
-      // Adiciona o DDD (sempre entre parênteses)
-      if (valor.length > 0) formatado += '(' + valor.substring(0, 2) + ') '; // DDD
-
-      // Pega os números restantes para formatar corretamente
-      let numerosRestantes = valor.substring(2);
-
-      // Formatação da parte do número
-      if (numerosRestantes.length <= 5) {
-        formatado += numerosRestantes; // Se tiver 5 ou menos números, adiciona sem hífen
-      } else {
-        formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 11); // Hífen após o 5º número
-      }
-
-      // Atualiza o valor do input com a máscara
-      telefoneInput.value = formatado;
-    });
-
-    // Permite apagar os números corretamente (excluindo símbolos)
-    telefoneInput.addEventListener('keydown', function (event) {
-      // Se pressionado a tecla Backspace (apagar)
-      if (event.key === 'Backspace') {
+      telefoneInput.addEventListener('input', function () {
         let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-        telefoneInput.value = valor; // Permite que o usuário apague os números e símbolos
-      }
-    });
-  });
 
+        // Limita a 15 dígitos (incluindo o código do país)
+        if (valor.length > 15) valor = valor.slice(0, 15); 
+
+        let formatado = '';
+
+        // Adiciona o código de país dinâmico
+        if (valor.length > 0) {
+          let codigoPais = valor.substring(0, 2); // Código do país (2 dígitos)
+          formatado += '+' + codigoPais + ' '; // Adiciona o símbolo de '+' e o código do país
+          valor = valor.substring(2); // Remove o código do país para o próximo processamento
+        }
+
+        // Adiciona o DDD (sempre entre parênteses)
+        if (valor.length > 0) formatado += '(' + valor.substring(0, 2) + ') '; // DDD
+
+        // Pega os números restantes para formatar corretamente
+        let numerosRestantes = valor.substring(2);
+
+        // Formatação da parte do número
+        if (numerosRestantes.length <= 5) {
+          formatado += numerosRestantes; // Se tiver 5 ou menos números, adiciona sem hífen
+        } else {
+          formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 11); // Hífen após o 5º número
+        }
+
+        // Atualiza o valor do input com a máscara
+        telefoneInput.value = formatado;
+      });
+    });
   </script>
+
+
+
+
+
+
+
 
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
