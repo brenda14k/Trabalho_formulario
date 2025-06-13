@@ -3,7 +3,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -62,16 +61,16 @@
 
           <div class="form-group">
              <label for="escolaridade">Nível de escolaridade:</label>
-            <select id="escolaridade" name="escolaridade"> 
+            <select id="nivEsc" name="escolaridade"> 
             <option value=""></option>
-            <option value="fundamental_completo">Ensino Fundamental Completo</option>
-            <option value="fundamental_incompleto">Ensino Fundamental Incompleto</option>
-             <option value="medio_completo">Ensino Médio Completo</option>
-             <option value="medio_incompleto"">Ensino Médio Incompleto</option>
-             <option value="graduação">Graduação</option>
-             <option value="pós-graduação">Pós-graduação</option>
-             <option value="mestrado">Mestrado</option>
-             <option value="doutorado">Doutorado</option>
+            <option value="">Ensino Fundamental Completo</option>
+            <option value="">Ensino Fundamental Incompleto</option>
+             <option value="">Ensino Médio Completo</option>
+             <option value="">Ensino Médio Incompleto</option>
+             <option value="">Graduação</option>
+             <option value="">Pós-graduação</option>
+             <option value="">Mestrado</option>
+             <option value="">Doutorado</option>
                 <div class="error" id="erroEscolaridade"></div>
     </div>
       </select>
@@ -203,10 +202,11 @@
       }
 
 
-     if (isValid) {
-  alert("Formulário enviado com sucesso!");
-} else {
-  console.log(isValid);
+      if (isValid) {
+        alert("Formulário enviado com sucesso!");
+      }
+
+      return isValid;
     }
 
      document.addEventListener('DOMContentLoaded', function () {
@@ -216,8 +216,8 @@
       let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
       // Limita o número de caracteres a 19 (total de caracteres no formato "+XX (XX) XXXXX-XXXX")
-      if (valor.length > 19) {
-        valor = valor.substring(0, 19); // Limita a 15 caracteres numéricos
+      if (valor.length > 15) {
+        valor = valor.substring(0, 15); // Limita a 15 caracteres numéricos
       }
 
       // Se o valor começa com "+", mantemos e formamos a máscara corretamente
