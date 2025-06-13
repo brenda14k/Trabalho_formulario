@@ -213,56 +213,57 @@
 
       <!---Java Sript só do telefone ---->
       
-   document.addEventListener('DOMContentLoaded', function () {
-    const telefoneInput = document.getElementById('telefone');
+  
+    document.addEventListener('DOMContentLoaded', function () {
+  const telefoneInput = document.getElementById('telefone');
 
-    telefoneInput.addEventListener('input', function () {
-      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+  telefoneInput.addEventListener('input', function () {
+    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-      // Limita o número de caracteres a 19 (total de caracteres no formato "+XX (XX) XXXXX-XXXX")
-      if (valor.length > 19) {
-        valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
-      }
+    // Limita o número de caracteres a 19 (total de caracteres no formato "+XX (XX) XXXXX-XXXX")
+    if (valor.length > 19) {
+      valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
+    }
 
-      let formatado = '';
+    let formatado = '';
 
-      // Se o valor começa com "+", mantemos e formamos a máscara corretamente
-      if (valor.length > 0 && valor[0] !== '+') {
-        valor = '+' + valor; // Adiciona o "+" no início se não existir
-      }
+    // Se o valor começa com "+", mantemos e formamos a máscara corretamente
+    if (valor.length > 0 && valor[0] !== '+') {
+      valor = '+' + valor; // Adiciona o "+" no início se não existir
+    }
 
-      // Formatação do telefone: "+XX (XX) XXXXX-XXXX"
-      if (valor.length > 1) {
-        formatado = valor.substring(0, 3); // Adiciona o "+XX"
-      }
-      if (valor.length > 3) {
-        formatado += ' (' + valor.substring(3, 5) + ') '; // Adiciona o "(XX)"
-      }
-      if (valor.length > 5) {
-        formatado += valor.substring(5, 10); // Adiciona o "XXXXX"
-      }
-      if (valor.length > 9) {
-        formatado += '-'; // Adiciona o "-"
-      }
-      if (valor.length > 10) {
-        formatado += valor.substring(10, 15); // Adiciona o "XXXX"
-      }
+    // Formatação do telefone: "+XX (XX) XXXXX-XXXX"
+    if (valor.length > 1) {
+      formatado = valor.substring(0, 3); // Adiciona o "+XX"
+    }
+    if (valor.length > 3) {
+      formatado += ' (' + valor.substring(3, 5) + ') '; // Adiciona o "(XX)"
+    }
+    if (valor.length > 5) {
+      formatado += valor.substring(5, 10); // Adiciona o "XXXXX"
+    }
+    if (valor.length > 9) {
+      formatado += '-'; // Adiciona o "-"
+    }
+    if (valor.length > 10) {
+      formatado += valor.substring(10, 15); // Adiciona o "XXXX"
+    }
 
-      telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-    });
-
-    telefoneInput.addEventListener('keydown', function (event) {
-      if (event.key === 'Backspace') {
-        let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-        telefoneInput.value = valor; // Atualiza o campo sem formatação
-
-        // Reaplica a formatação após apagar
-        setTimeout(function () {
-          telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
-        }, 0);
-      }
-    });
+    telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
   });
+
+  telefoneInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Backspace') {
+      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+      telefoneInput.value = valor; // Atualiza o campo sem formatação
+
+      // Reaplica a formatação após apagar
+      setTimeout(function () {
+        telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
+      }, 0);
+    }
+  });
+});
 </script>
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
