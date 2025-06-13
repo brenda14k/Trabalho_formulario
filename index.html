@@ -209,21 +209,21 @@
       return isValid;
     }
 
-     document.addEventListener('DOMContentLoaded', function () {
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     const telefoneInput = document.getElementById('telefone');
 
     telefoneInput.addEventListener('input', function () {
       let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
       // Limita o número de caracteres a 19 (total de caracteres no formato "+XX (XX) XXXXX-XXXX")
-      if (valor.length > 15) {
-        valor = valor.substring(0, 15); // Limita a 15 caracteres numéricos
+      if (valor.length > 19) {
+        valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
       }
 
-      // Se o valor começa com "+", mantemos e formamos a máscara corretamente
       let formatado = '';
 
-      // Adiciona o "+" somente no início, caso não exista
+      // Se o valor começa com "+", mantemos e formamos a máscara corretamente
       if (valor.length > 0 && valor[0] !== '+') {
         valor = '+' + valor; // Adiciona o "+" no início se não existir
       }
@@ -260,8 +260,7 @@
       }
     });
   });
-  </script>
-
+</script>
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
