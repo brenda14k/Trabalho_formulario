@@ -1,6 +1,5 @@
       <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -35,8 +34,7 @@
 
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" name="telefone"placeholder="+xx (xx) xxxxx-xxxx"
-        maxlength="18" />
+      <input type="tel" id="telefone" name="telefone" placeholder="+xx (xx) xxxxx-xxxx" maxlength="18" />
       <div class="error" id="erroTelefone"></div>
     </div>
 
@@ -103,19 +101,16 @@
       if (nome.trim() === "") {
         const msg = "O nome é obrigatório.";
         document.getElementById("erroNome").textContent = msg;
-        console.log(msg);
         isValid = false;
       } else if (nome.length < 3) {
         const msg = "O nome deve ter pelo menos 3 caracteres.";
         document.getElementById("erroNome").textContent = msg;
-        console.log(msg);
         isValid = false;
       }
 
       if (dataNascimento === "") {
         const msg = "A data de nascimento é obrigatória.";
         document.getElementById("erroDataNascimento").textContent = msg;
-        console.log(msg);
         isValid = false;
       }
 
@@ -123,24 +118,20 @@
       if (email.trim() === "") {
         const msg = "O e-mail é obrigatório.";
         document.getElementById("erroEmail").textContent = msg;
-        console.log(msg);
         isValid = false;
       } else if (!emailPattern.test(email)) {
         const msg = "Por favor, insira um e-mail válido.";
         document.getElementById("erroEmail").textContent = msg;
-        console.log(msg);
         isValid = false;
       }
 
       if (telefone.trim() === "") {
         const msg = "O telefone é obrigatório.";
         document.getElementById("erroTelefone").textContent = msg;
-        console.log(msg);
         isValid = false;
-      } else if (telefone.length !== 17) {
+      } else if (telefone.length < 15 || telefone.length > 18) {
         const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX.";
         document.getElementById("erroTelefone").textContent = msg;
-        console.log(msg);
         isValid = false;
       }
 
@@ -148,14 +139,12 @@
       if (habilidades.length === 0) {
         const msg = "Por favor, selecione ao menos uma habilidade.";
         document.getElementById("erroHabilidades").textContent = msg;
-        console.log(msg);
         isValid = false;
       }
 
       if (pais === "") {
         const msg = "O país é obrigatório.";
         document.getElementById("erroPais").textContent = msg;
-        console.log(msg);
         isValid = false;
       }
 
@@ -166,39 +155,27 @@
       return isValid;
     }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const telefoneInput = document.getElementById('telefone');
+    document.addEventListener('DOMContentLoaded', function () {
+      const telefoneInput = document.getElementById('telefone');
 
-    telefoneInput.addEventListener('input', function () {
-      let valor = telefoneInput.value.replace(/\D/g, ''); // tira tudo que não é número
+      telefoneInput.addEventListener('input', function () {
+        let valor = telefoneInput.value.replace(/\D/g, ''); // remove tudo que não for número
 
-      // Limita a 11 dígitos (DD + número celular)
-      if (valor.length > 11) valor = valor.slice(0, 11);
+        // Limitar a quantidade de números
+        if (valor.length > 11) valor = valor.slice(0, 11); // 2 dígitos do DDD + 9 dígitos do telefone
 
-      let formatado = '';
+        let formatado = '';
 
-       if (valor.length > 0) formatado += '+'; 
-      if (valor.length > 0) formatado += ' (';
+        if (valor.length > 0) formatado += '+'; // permite código de país livre
+        if (valor.length > 0) formatado += valor.substring(0, 2); // adicionar o código do país
+        if (valor.length > 2) formatado += ' (' + valor.substring(2, 4) + ') '; // DDD
+        if (valor.length > 4) formatado += valor.substring(4, 9); // primeira parte do número
+        if (valor.length > 8) formatado += '-' + valor.substring(9, 13); // segunda parte do número
 
-      if (valor.length >= 2) {
-        formatado += valor.substring(0, 2) + ') ';
-      } else if (valor.length < 2) {
-        formatado += valor;
-      }
-
-      let numerosRestantes = valor.substring(2);
-
-      if (numerosRestantes.length <= 5) {
-        formatado += numerosRestantes;
-      } else {
-        // hífen depois do 5º número
-        formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 9);
-      }
-
-      telefoneInput.value = formatado;
+        telefoneInput.value = formatado;
+      });
     });
-  });
-</script>
+  </script>
 
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
