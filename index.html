@@ -154,31 +154,43 @@
 
       return isValid;
     }
-
- document.addEventListener('DOMContentLoaded', function () {
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     const telefoneInput = document.getElementById('telefone');
 
     telefoneInput.addEventListener('input', function () {
       let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-      // Limita a 11 dígitos (DDD + número celular)
-      if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 caracteres
+      // Limita a 15 dígitos (incluindo o código do país)
+      if (valor.length > 15) valor = valor.slice(0, 15); 
 
-      let formatado = '+55 '; // Código de país fixo +55
+      let formatado = '';
+
+      // Adiciona o código de país dinâmico
+      if (valor.length > 0) {
+        let codigoPais = valor.substring(0, 2); // Código do país (2 dígitos)
+        formatado += '+' + codigoPais + ' '; // Adiciona o símbolo de '+' e o código do país
+        valor = valor.substring(2); // Remove o código do país para o próximo processamento
+      }
 
       // Adiciona o DDD (sempre entre parênteses)
       if (valor.length > 0) formatado += '(' + valor.substring(0, 2) + ') '; // DDD
 
-      // Adiciona o número do telefone
-      if (valor.length > 2) formatado += valor.substring(2, 7); // Primeira parte do número
-      if (valor.length > 6) formatado += '-'; // Hífen após o 5º número
-      if (valor.length > 6) formatado += valor.substring(7, 11); // Segunda parte do número
+      // Pega os números restantes para formatar corretamente
+      let numerosRestantes = valor.substring(2);
+
+      // Formatação da parte do número
+      if (numerosRestantes.length <= 5) {
+        formatado += numerosRestantes; // Se tiver 5 ou menos números, adiciona sem hífen
+      } else {
+        formatado += numerosRestantes.substring(0, 5) + '-' + numerosRestantes.substring(5, 11); // Hífen após o 5º número
+      }
 
       // Atualiza o valor do input com a máscara
       telefoneInput.value = formatado;
     });
 
-    // Permite apagar os caracteres corretamente
+    // Permite apagar os números corretamente (excluindo símbolos)
     telefoneInput.addEventListener('keydown', function (event) {
       // Se pressionado a tecla Backspace (apagar)
       if (event.key === 'Backspace') {
