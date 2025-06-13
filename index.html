@@ -130,10 +130,10 @@
         const msg = "O telefone é obrigatório.";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
-      } else if (telefone.length < 13 || telefone.length > 16) {
-        const msg = "Formato inválido. Use (+XX) 99999-9999.";
-        document.getElementById("erroTelefone").textContent = msg;
-        isValid = false;
+      } else if (telefone.length !== 19) { // 19 caracteres incluindo a máscara (+XX) 99999-9999
+  const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
+  document.getElementById("erroTelefone").textContent = msg;
+  isValid = false;
       }
 
       let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
