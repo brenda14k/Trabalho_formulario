@@ -111,10 +111,11 @@
     </div>
   </form>
 
-         <div id="mensagemSucesso" style="display:none; color:green; margin-top:20px;">
-    <strong>Formulário enviado com sucesso!</strong>
-  </div>
-
+        if (isValid) {
+        alert("Formulário enviado com sucesso!");
+      } else {
+        console.log("O formulário não foi enviado por causa de erros.");
+      }
 
   <script>
     function processar_formulario(event) {
@@ -207,8 +208,7 @@
    
     }
 
-    // Usando o evento `submit` para chamar a função `processar_formulario`
-    document.getElementById("formCadastro").addEventListener("submit", processar_formulario);
+  
         
 
 
