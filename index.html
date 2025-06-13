@@ -38,21 +38,8 @@
       <input type="tel" id="telefone" name="telefone" placeholder="+XX (XX) XXXXX-XXXX" maxlength="19" />
       <div class="error" id="erroTelefone"></div>
     </div>
-
-    <div class="form-group">
-      <label>Habilidades:</label>
-      <label for="html">
-        <input type="checkbox" id="html" name="habilidades" value="HTML" /> HTML
-      </label>
-      <label for="css">
-        <input type="checkbox" id="css" name="habilidades" value="CSS" /> CSS
-      </label>
-      <label for="js">
-        <input type="checkbox" id="js" name="habilidades" value="JS" /> JavaScript
-      </label>
-      <div class="error" id="erroHabilidades"></div>
-    </div>
-
+        
+</div>
     <div class="form-group">
       <label for="pais">País:</label>
       <select id="pais" name="pais">
@@ -66,8 +53,56 @@
         <option value="Jp">Japão</option>
         <option value="Pr">Paraguai</option>
       </select>
+          
       <div class="error" id="erroPais"></div>
     </div>
+
+          <div class="form-group">
+             <label for="pais">Nível de escolaridade:</label>
+            <select id="nivEsc" name="escolaridade"> 
+            <optio value=""></optio>
+            <optio value="">Ensino Fundamental Completo</optio>
+            <optio value="">Ensino Fundamental Incompleto</optio>
+             <optio value="">Ensino Médio Completo</optio>
+             <optio value="">Ensino Médio Incompleto</optio>
+             <optio value="">Graduação</optio>
+             <optio value="">Pós-graduação</optio>
+             <optio value="">Mestrado</optio>
+             <optio value="">Doutorado</optio>
+                <div class="error" id="erroEscolaridade"></div>
+    </div>
+      </select>
+      
+    <div class="form-group">
+      <label>Habilidades:</label>
+      <label for="html">
+        <input type="checkbox" id="html" name="habilidades" value="HTML" /> HTML
+      </label>
+      <label for="css">
+        <input type="checkbox" id="css" name="habilidades" value="CSS" /> CSS
+      </label>
+      <label for="js">
+        <input type="checkbox" id="js" name="habilidades" value="JS" /> JavaScript
+      </label>
+      <div class="error" id="erroHabilidades"></div>
+    </div>
+      
+ <div class="form-group">
+      <label> Nivel profissional:</label>
+      <label for="html">
+        <input type="checkbox" id="html" name="profisional" value="Junior" /> Junior
+      </label>
+      <label for="css">
+        <input type="checkbox" id="css" name="profissional" value="Pleno" /> Pleno
+      </label>
+      <label for="js">
+        <input type="checkbox" id="js" name="profissional" value="Sênior" /> Sênior
+      </label>
+      <div class="error" id="erroProfissional"></div>
+    </div>
+
+    
+
 
     <div class="form-group">
       <label for="comentarios">Comentários:</label><br />
@@ -88,6 +123,8 @@
       let telefone = document.querySelector("#telefone").value;
       let comentarios = document.querySelector("#comentarios").value;
       let pais = document.querySelector("#pais").value;
+      let escolaridade = document.querySelector("#escolaridade").value;
+
 
       document.getElementById("erroNome").textContent = "";
       document.getElementById("erroDataNascimento").textContent = "";
@@ -95,6 +132,7 @@
       document.getElementById("erroTelefone").textContent = "";
       document.getElementById("erroHabilidades").textContent = "";
       document.getElementById("erroPais").textContent = "";
+      document.getElementById("erroEscolaridade").textContent = "";
       document.getElementById("erroComentarios").textContent = "";
 
       let isValid = true;
@@ -148,6 +186,19 @@
         document.getElementById("erroPais").textContent = msg;
         isValid = false;
       }
+          
+           if (escolaridade === "") {
+        const msg = "O Nivel de escolaridade é obrigatório.";
+        document.getElementById("erroEscolaridade").textContent = msg;
+        isValid = false;
+      }
+
+           if (profisional === "") {
+        const msg = "O Nivel Profissional é obrigatório.";
+        document.getElementById("erroProfisonal").textContent = msg;
+        isValid = false;
+      }else 
+
 
       if (isValid) {
         alert("Formulário enviado com sucesso!");
