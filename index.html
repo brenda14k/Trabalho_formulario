@@ -2,7 +2,6 @@
 <!---Telefone arrumado conferir os erros--->
 
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -14,7 +13,7 @@
 </head>
 
 <body>
-  <form id="formCadastro" onsubmit="return processar_formulario()">
+  <form id="formCadastro">
     <h3>Cadastre-se</h3>
 
     <div class="form-group">
@@ -40,8 +39,7 @@
       <input type="tel" id="telefone" name="telefone" placeholder="+XX (XX) XXXXX-XXXX" maxlength="19" />
       <div class="error" id="erroTelefone"></div>
     </div>
-        
-</div>
+
     <div class="form-group">
       <label for="pais">País:</label>
       <select id="pais" name="pais">
@@ -55,26 +53,25 @@
         <option value="Jp">Japão</option>
         <option value="Pr">Paraguai</option>
       </select>
-          
       <div class="error" id="erroPais"></div>
     </div>
 
-          <div class="form-group">
-             <label for="escolaridade">Nível de escolaridade:</label>
-            <select id="nivEsc" name="escolaridade"> 
-            <option value=""></option>
-            <option value="">Ensino Fundamental Completo</option>
-            <option value="">Ensino Fundamental Incompleto</option>
-             <option value="">Ensino Médio Completo</option>
-             <option value="">Ensino Médio Incompleto</option>
-             <option value="">Graduação</option>
-             <option value="">Pós-graduação</option>
-             <option value="">Mestrado</option>
-             <option value="">Doutorado</option>
-                <div class="error" id="erroEscolaridade"></div>
-    </div>
+    <div class="form-group">
+      <label for="escolaridade">Nível de escolaridade:</label>
+      <select id="escolaridade" name="escolaridade">
+        <option value=""></option>
+        <option value="fundamental_completo">Ensino Fundamental Completo</option>
+        <option value="fundamental_incompleto">Ensino Fundamental Incompleto</option>
+        <option value="medio_completo">Ensino Médio Completo</option>
+        <option value="medio_incompleto">Ensino Médio Incompleto</option>
+        <option value="graduacao">Graduação</option>
+        <option value="pos_graduacao">Pós-graduação</option>
+        <option value="mestrado">Mestrado</option>
+        <option value="doutorado">Doutorado</option>
       </select>
-      
+      <div class="error" id="erroEscolaridade"></div>
+    </div>
+
     <div class="form-group">
       <label>Habilidades:</label>
       <label for="html">
@@ -88,8 +85,8 @@
       </label>
       <div class="error" id="erroHabilidades"></div>
     </div>
-      
-   <div class="form-group">
+
+    <div class="form-group">
       <label>Nível Profissional:</label>
       <label for="junior">
         <input type="radio" id="junior" name="profissional" value="Junior" /> Junior
@@ -102,8 +99,6 @@
       </label>
       <div class="error" id="erroProfissional"></div>
     </div>
-    
-
 
     <div class="form-group">
       <label for="comentarios">Comentários:</label><br />
@@ -117,7 +112,9 @@
   </form>
 
   <script>
-    function processar_formulario() {
+    function processar_formulario(event) {
+      event.preventDefault(); // Impede o envio do formulário e o recarregamento da página
+
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
       let email = document.querySelector("#email").value;
@@ -127,7 +124,7 @@
       let escolaridade = document.querySelector("#escolaridade").value;
       let profissional = document.querySelector('input[name="profissional"]:checked');
 
-
+      // Limpando as mensagens de erro
       document.getElementById("erroNome").textContent = "";
       document.getElementById("erroDataNascimento").textContent = "";
       document.getElementById("erroEmail").textContent = "";
@@ -135,11 +132,12 @@
       document.getElementById("erroHabilidades").textContent = "";
       document.getElementById("erroPais").textContent = "";
       document.getElementById("erroEscolaridade").textContent = "";
-      document.getElementById("erroProfisional").textContent = "";
+      document.getElementById("erroProfissional").textContent = "";
       document.getElementById("erroComentarios").textContent = "";
 
       let isValid = true;
 
+      // Validações
       if (nome.trim() === "") {
         const msg = "O nome é obrigatório.";
         document.getElementById("erroNome").textContent = msg;
@@ -172,9 +170,9 @@
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
       } else if (telefone.length !== 19) { // 19 caracteres
-  const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
-  document.getElementById("erroTelefone").textContent = msg;
-  isValid = false;
+        const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
+        document.getElementById("erroTelefone").textContent = msg;
+        isValid = false;
       }
 
       let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
@@ -189,27 +187,29 @@
         document.getElementById("erroPais").textContent = msg;
         isValid = false;
       }
-          
-           if (escolaridade === "") {
-        const msg = "O Nivel de escolaridade é obrigatório.";
+
+      if (escolaridade === "") {
+        const msg = "O Nível de escolaridade é obrigatório.";
         document.getElementById("erroEscolaridade").textContent = msg;
         isValid = false;
       }
 
-          if (!profissional) {
+      if (!profissional) {
         document.getElementById("erroProfissional").textContent = "O nível profissional é obrigatório.";
         isValid = false;
       }
 
-
       if (isValid) {
         alert("Formulário enviado com sucesso!");
+      } else {
+        console.log("O formulário não foi enviado por causa de erros.");
       }
-
-      return isValid;
     }
 
-<script>
+    // Usando o evento `submit` para chamar a função `processar_formulario`
+    document.getElementById("formCadastro").addEventListener("submit", processar_form
+
+                                                             
   document.addEventListener('DOMContentLoaded', function () {
     const telefoneInput = document.getElementById('telefone');
 
