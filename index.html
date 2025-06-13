@@ -111,6 +111,12 @@
     </div>
   </form>
 
+         if (isValid) {
+        alert("Formulário enviado com sucesso!");
+      } else {
+        console.log("O formulário não foi enviado por causa de erros.");
+      }
+
   <script>
     function processar_formulario(event) {
       event.preventDefault(); // Impede o envio do formulário e o recarregamento da página
@@ -199,11 +205,7 @@
         isValid = false;
       }
 
-      if (isValid) {
-        alert("Formulário enviado com sucesso!");
-      } else {
-        console.log("O formulário não foi enviado por causa de erros.");
-      }
+   
     }
 
     // Usando o evento `submit` para chamar a função `processar_formulario`
