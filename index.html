@@ -10,10 +10,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Formulário de Exemplo</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
 </head>
 
 <body>
-  <form id="formCadastro">
+  <form id="formCadastro" onsubmit="processar_formulario(event)">
     <h3>Cadastre-se</h3>
 
     <div class="form-group">
@@ -113,7 +119,7 @@
 
   <script>
     function processar_formulario(event) {
-
+      event.preventDefault(); // Impede o envio do formulário e o recarregamento da página
 
       let nome = document.querySelector("#nome").value;
       let dataNascimento = document.querySelector("#data_nascimento").value;
@@ -142,10 +148,6 @@
         const msg = "O nome é obrigatório.";
         document.getElementById("erroNome").textContent = msg;
         isValid = false;
-      } else if (nome.length < 3) {
-        const msg = "O nome deve ter pelo menos 3 caracteres.";
-        document.getElementById("erroNome").textContent = msg;
-        isValid = false;
       }
 
       if (dataNascimento === "") {
@@ -169,7 +171,7 @@
         const msg = "O telefone é obrigatório.";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
-      } else if (telefone.length !== 19) { // 19 caracteres
+      } else if (telefone.length !== 19) { 
         const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
@@ -199,67 +201,54 @@
         isValid = false;
       }
 
-     if (isValid) {
-        alert("Formulário enviado com sucesso!");  // Aqui está o alert de sucesso
+      if (isValid) {
+        // Exibe o alert de sucesso
+        alert("Formulário enviado com sucesso!");
       }
-           document.getElementById("formCadastro").addEventListener("submit" processa_formulario);
-        
+    }
 
-
-      <!---Java Sript só do telefone ---->
-      
-  
+    // Script para formatação do telefone
     document.addEventListener('DOMContentLoaded', function () {
-  const telefoneInput = document.getElementById('telefone');
+      const telefoneInput = document.getElementById('telefone');
 
-  telefoneInput.addEventListener('input', function () {
-    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+      telefoneInput.addEventListener('input', function () {
+        let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-    // Limita o número de caracteres a 19 (total de caracteres no formato "+XX (XX) XXXXX-XXXX")
-    if (valor.length > 19) {
-      valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
-    }
+        if (valor.length > 19) {
+          valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
+        }
 
-    let formatado = '';
+        let formatado = '';
 
-    // Se o valor começa com "+", mantemos e formamos a máscara corretamente
-    if (valor.length > 0 && valor[0] !== '+') {
-      valor = '+' + valor; // Adiciona o "+" no início se não existir
-    }
+        if (valor.length > 0 && valor[0] !== '+') {
+          valor = '+' + valor;
+        }
 
-    // Formatação do telefone: "+XX (XX) XXXXX-XXXX"
-    if (valor.length > 1) {
-      formatado = valor.substring(0, 3); // Adiciona o "+XX"
-    }
-    if (valor.length > 3) {
-      formatado += ' (' + valor.substring(3, 5) + ') '; // Adiciona o "(XX)"
-    }
-    if (valor.length > 5) {
-      formatado += valor.substring(5, 10); // Adiciona o "XXXXX"
-    }
-    if (valor.length > 9) {
-      formatado += '-'; // Adiciona o "-"
-    }
-    if (valor.length > 10) {
-      formatado += valor.substring(10, 15); // Adiciona o "XXXX"
-    }
+        if (valor.length > 1) {
+          formatado = valor.substring(0, 3);
+        }
+        if (valor.length > 3) {
+          formatado += ' (' + valor.substring(3, 5) + ') ';
+        }
+        if (valor.length > 5) {
+          formatado += valor.substring(5, 10);
+        }
+        if (valor.length > 9) {
+          formatado += '-';
+        }
+        if (valor.length > 10) {
+          formatado += valor.substring(10, 15);
+        }
 
-    telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-  });
+        telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
+      });
+    });
+  </script>
 
-  telefoneInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Backspace') {
-      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-      telefoneInput.value = valor; // Atualiza o campo sem formatação
+</body>
 
-      // Reaplica a formatação após apagar
-      setTimeout(function () {
-        telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
-      }, 0);
-    }
-  });
-});
-</script>
+</html>
+
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
