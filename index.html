@@ -1,8 +1,6 @@
       <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -36,7 +34,7 @@
 
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" name="telefone" placeholder="+XX (XX) XXXXX-XXXX" maxlength="18" />
+      <input type="tel" id="telefone" name="telefone" placeholder="(+XX) XXXXX-XXXX" maxlength="20" />
       <div class="error" id="erroTelefone"></div>
     </div>
 
@@ -131,8 +129,8 @@
         const msg = "O telefone é obrigatório.";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
-      } else if (telefone.length < 13 || telefone.length > 14) {
-        const msg = "Formato inválido. Use (XX) 99999-9999.";
+      } else if (telefone.length < 13 || telefone.length > 16) {
+        const msg = "Formato inválido. Use (+XX) 99999-9999.";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
       }
@@ -156,47 +154,56 @@
 
       return isValid;
     }
-document.addEventListener('DOMContentLoaded', function () {
-  const telefoneInput = document.getElementById('telefone');
 
-  telefoneInput.addEventListener('input', function () {
-    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+    document.addEventListener('DOMContentLoaded', function () {
+      const telefoneInput = document.getElementById('telefone');
 
-    // Limita a 11 dígitos (DDD + número celular)
-    if (valor.length > 11) valor = valor.slice(0, 11);
+      telefoneInput.addEventListener('input', function () {
+        let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-    let formatado = '';
+        // Formatação do número
+        let formatado = '';
 
-    // Formatação do telefone
-    if (valor.length > 0) {
-      formatado = '(' + valor.substring(0, 2) + ') '; // Formato (XX)
-    }
-    if (valor.length > 2) {
-      formatado += valor.substring(2, 7); // Formato (XX) 99999
-    }
-    if (valor.length > 6) {
-      formatado += '-'; // Formato (XX) 99999-
-    }
-    if (valor.length > 6) {
-      formatado += valor.substring(7, 11); // Formato (XX) 99999-9999
-    }
+        // Se começar com "+", mantemos e formamos a máscara
+        if (valor.length > 0 && valor[0] === '+') {
+          formatado = '+' + valor.substring(1, valor.length); // Adiciona o "+"
+        } else {
+          valor = '+' + valor; // Adiciona o "+" no início
+        }
 
-    telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-  });
+        // Limita a 11 dígitos (DDD + número celular)
+        if (valor.length > 0) {
+          formatado = '(' + valor.substring(1, 3) + ') '; // Formato (XX)
+        }
+        if (valor.length > 3) {
+          formatado += valor.substring(3, 8); // Formato (XX) 99999
+        }
+        if (valor.length > 5) {
+          formatado += '-'; // Formato (XX) 99999-
+        }
+        if (valor.length > 6) {
+          formatado += valor.substring(8, 12); // Formato (XX) 99999-9999
+        }
 
-  telefoneInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Backspace') {
-      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-      telefoneInput.value = valor; // Atualiza o campo sem formatação
+        telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
+      });
 
-      // Reaplica a formatação após apagar
-      setTimeout(function () {
-        telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
-      }, 0);
-    }
-  });
-});
+      telefoneInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Backspace') {
+          let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+          telefoneInput.value = valor; // Atualiza o campo sem formatação
+
+          // Reaplica a formatação após apagar
+          setTimeout(function () {
+            telefoneInput.dispatchEvent(new Event('input')); // Dispara o evento 'input' para reformatar
+          }, 0);
+        }
+      });
+    });
+
   </script>
+
+
 
        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
