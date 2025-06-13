@@ -155,8 +155,7 @@
       return isValid;
     }
 
-
-  document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
     const telefoneInput = document.getElementById('telefone');
 
     telefoneInput.addEventListener('input', function () {
@@ -172,7 +171,8 @@
 
       // Adiciona o número do telefone
       if (valor.length > 2) formatado += valor.substring(2, 7); // Primeira parte do número
-      if (valor.length > 6) formatado += '-' + valor.substring(7, 11); // Segunda parte com hífen
+      if (valor.length > 6) formatado += '-'; // Hífen após o 5º número
+      if (valor.length > 6) formatado += valor.substring(7, 11); // Segunda parte do número
 
       // Atualiza o valor do input com a máscara
       telefoneInput.value = formatado;
@@ -187,7 +187,6 @@
       }
     });
   });
-
 
   </script>
 
