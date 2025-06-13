@@ -1,5 +1,6 @@
   <!----conferir os erros----->
         <!---organizar o codigo e descobrir porque o formulário está com event e algo diferente no e-mail--->
+<!---nome só pode aceitar nome com até tres letras--->
 
 
 
@@ -157,7 +158,7 @@
         const msg = "O e-mail é obrigatório.";
         document.getElementById("erroEmail").textContent = msg;
         isValid = false;
-      } else if (!emailPattern.test(email)) {
+      } else if (!emailPattern.test(email)) { 
         const msg = "Por favor, insira um e-mail válido.";
         document.getElementById("erroEmail").textContent = msg;
         isValid = false;
