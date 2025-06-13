@@ -1,8 +1,9 @@
       <!---Lembrar de colocar mais 3 tipos de caixas de preenchimento-->
 
-<!DOCTYPE html>
-   
-   <html lang="pt-BR">
+
+
+ <!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
@@ -35,7 +36,7 @@
 
     <div class="form-group">
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" name="telefone" placeholder="+xx (xx) xxxxx-xxxx" maxlength="18" />
+      <input type="tel" id="telefone" name="telefone" placeholder="(XX) 99999-9999" maxlength="15" />
       <div class="error" id="erroTelefone"></div>
     </div>
 
@@ -130,8 +131,8 @@
         const msg = "O telefone é obrigatório.";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
-      } else if (telefone.length < 15 || telefone.length > 18) {
-        const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX.";
+      } else if (telefone.length < 13 || telefone.length > 14) {
+        const msg = "Formato inválido. Use (XX) 99999-9999.";
         document.getElementById("erroTelefone").textContent = msg;
         isValid = false;
       }
@@ -155,52 +156,40 @@
 
       return isValid;
     }
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const telefoneInput = document.getElementById('telefone');
 
-    telefoneInput.addEventListener('input', function () {
-      let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+    document.addEventListener('DOMContentLoaded', function () {
+      const telefoneInput = document.getElementById('telefone');
 
-      // Limita a 11 dígitos (DDD + número celular)
-      if (valor.length > 11) valor = valor.slice(0, 11); // Limita a 11 caracteres
-
-      let formatado = '+55 '; // Código de país fixo +55
-
-      // Adiciona o DDD (sempre entre parênteses)
-      if (valor.length > 0) formatado += '(' + valor.substring(0, 2) + ') '; // DDD
-
-      // Adiciona o número do telefone
-      if (valor.length > 2) formatado += valor.substring(2, 7); // Primeira parte do número
-      if (valor.length > 6) formatado += '-'; // Hífen após o 5º número
-      if (valor.length > 6) formatado += valor.substring(7, 11); // Segunda parte do número
-
-      // Atualiza o valor do input com a máscara
-      telefoneInput.value = formatado;
-    });
-
-    // Permite apagar os caracteres corretamente
-    telefoneInput.addEventListener('keydown', function (event) {
-      // Se pressionado a tecla Backspace (apagar)
-      if (event.key === 'Backspace') {
+      telefoneInput.addEventListener('input', function () {
         let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-        telefoneInput.value = valor; // Permite que o usuário apague os números e símbolos
-      }
-    });
-  });
-</script>
 
+        // Limita a 11 dígitos (DDD + número celular)
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
+        let formatado = ''; // Inicializa a variável formatada
+
+        // Formata o número de telefone
+        if (valor.length > 0) {
+          formatado = '(' + valor.substring(0, 2) + ') ' + valor.substring(2, 7); // Formato (XX) 99999
+        }
+        if (valor.length > 6) {
+          formatado += '-' + valor.substring(7, 11); // Formato (XX) 99999-9999
+        }
+
+        telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
+      });
+
+      // Permite apagar os caracteres corretamente
+      telefoneInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Backspace') {
+          let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+          telefoneInput.value = valor; // Permite que o usuário apague os números e símbolos
+        }
+      });
+    });
   </script>
 
-
-
-
-
-
-
-
-
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
         <script>
           new FroalaEditor('#comentarios');
