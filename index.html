@@ -111,11 +111,10 @@
     </div>
   </form>
 
-         if (isValid) {
-        alert("Formulário enviado com sucesso!");
-      } else {
-        console.log("O formulário não foi enviado por causa de erros.");
-      }
+         <div id="mensagemSucesso" style="display:none; color:green; margin-top:20px;">
+    <strong>Formulário enviado com sucesso!</strong>
+  </div>
+
 
   <script>
     function processar_formulario(event) {
