@@ -146,9 +146,12 @@
         document.getElementById("erroNome").textContent = msg;
         isValid = false;
       }
-       if (nome.trim() <2) {
-        const msg = "O nome não pode ter duas letras.";
-       }
+     elseif (nome.trim().length < 3) {
+  const msg = "O nome deve conter pelo menos 3 letras.";
+  document.getElementById("erroNome").textContent = msg;
+  isValid = false;
+}
+
       if (dataNascimento === "") {
         const msg = "A data de nascimento é obrigatória.";
         document.getElementById("erroDataNascimento").textContent = msg;
