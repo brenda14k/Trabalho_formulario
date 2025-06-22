@@ -1,5 +1,5 @@
   <!----conferir os erros----->
-        <!---organizar o codigo e descobrir porque o formulário está com event e algo diferente no e-mail--->
+      
 <!---nome só pode aceitar nome com até tres letras--->
 
 
@@ -146,7 +146,9 @@
         document.getElementById("erroNome").textContent = msg;
         isValid = false;
       }
-
+       if (nome.trim() <2) {
+        const msg = "O nome não pode ter duas letras.";
+       }
       if (dataNascimento === "") {
         const msg = "A data de nascimento é obrigatória.";
         document.getElementById("erroDataNascimento").textContent = msg;
