@@ -121,7 +121,7 @@
             let escolaridade = document.querySelector("#escolaridade").value;
             let profissional = document.querySelector('input[name="profissional"]:checked');
 
-            // Limpando as mensagens de erro
+            // Limpa as mensagens de erro
             document.getElementById("erroNome").textContent = "";
             document.getElementById("erroDataNascimento").textContent = "";
             document.getElementById("erroEmail").textContent = "";
@@ -201,7 +201,7 @@
             if (isValid) {
                 alert("Formulário enviado com sucesso!");  
 
-                // Limpar os campos do formulário após o alerta
+                // Limpa os campos do formulário após o alerta
                 setTimeout(function () {
                     document.getElementById("formCadastro").reset();  // Limpa os campos
                 }, 100);  
@@ -247,16 +247,13 @@
 
 
 
-<script type="text/javascript"
-src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_edi
-tor.pkgd.min.js"></script>
-    <link
-href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_e
-ditor.pkgd.min.css" rel="stylesheet" type="text/css" />
+   
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
     <script>
- new FroalaEditor
-('textarea');
+        new FroalaEditor("textarea");
 </script>
+
 </body>
 
 </html>
