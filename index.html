@@ -4,25 +4,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Formulário de Emprego</title>
+    <title>Agende seu Show</title>
     <link rel="stylesheet" href="style.css" />
-
 </head>
 
 <body>
     <form id="formCadastro" onsubmit="processar_formulario(event)">
-        <h3>Cadastre-se</h3>
+        <h3>Agende seu Show</h3>
 
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Nome completo…" value="" />
+            <input type="text" id="nome" name="nome" placeholder="Nome completo…" />
             <div class="error" id="erroNome"></div>
         </div>
 
         <div class="form-group">
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="date" id="data_nascimento" name="data_nascimento" />
-            <div class="error" id="erroDataNascimento"></div>
+            <label for="data_show">Data do Show:</label>
+            <input type="date" id="data_show" name="data_show" />
+            <div class="error" id="erroDataShow"></div>
         </div>
 
         <div class="form-group">
@@ -38,67 +37,62 @@
         </div>
 
         <div class="form-group">
-            <label for="pais">País:</label>
-            <select id="pais" name="pais">
-                <option value="">&nbsp;</option>
-                <option value="Ar">Argentina</option>
-                <option value="Br">Brasil</option>
-                <option value="Ca">Canadá</option>
-                <option value="Ch">Chile</option>
-                <option value="Kor">Coreia do Sul</option>
-                <option value="Ecu">Equador</option>
-                <option value="Jp">Japão</option>
-                <option value="Pr">Paraguai</option>
+            <label for="cidade">Cidade:</label>
+            <select id="cidade" name="cidade">
+                <option value="">Escolha uma cidade</option>
+                <option value="Salvador">Salvador</option>
+                <option value="Vitória">Vitória</option>
+                <option value="Belo Horizonte">Belo Horizonte</option>
+                <option value="Recife">Recife</option>
+                <option value="Curitiba">Curitiba</option>
+                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                <option value="Porto Alegre">Porto Alegre</option>
+                <option value="Florianópolis">Florianópolis</option>
+                <option value="Aracaju">Aracaju</option>
+                <option value="São Paulo">São Paulo</option>
             </select>
-            <div class="error" id="erroPais"></div>
+            <div class="error" id="erroCidade"></div>
         </div>
 
         <div class="form-group">
-            <label for="escolaridade">Nível de escolaridade:</label>
-            <select id="escolaridade" name="escolaridade">
-                <option value="">&nbsp;</option>
-                <option value="fundamental_completo">Ensino Fundamental Completo</option>
-                <option value="fundamental_incompleto">Ensino Fundamental Incompleto</option>
-                <option value="medio_completo">Ensino Médio Completo</option>
-                <option value="medio_incompleto">Ensino Médio Incompleto</option>
-                <option value="graduacao">Graduação</option>
-                <option value="pos_graduacao">Pós-graduação</option>
-                <option value="mestrado">Mestrado</option>
-                <option value="doutorado">Doutorado</option>
-            </select>
-            <div class="error" id="erroEscolaridade"></div>
-        </div>
-
-        <div class="form-group">
-            <label>Habilidades:</label>
+            <label>Horários de duração do Show:</label>
             <label for="html">
-                <input type="checkbox" id="html" name="habilidades" value="HTML" /> HTML
+                <input type="checkbox" id="html" name="h_show" value="1h" /> 1 hora
             </label>
             <label for="css">
-                <input type="checkbox" id="css" name="habilidades" value="CSS" /> CSS
+                <input type="checkbox" id="css" name="h_show" value="2h" /> 2 horas
             </label>
             <label for="js">
-                <input type="checkbox" id="js" name="habilidades" value="JS" /> JavaScript
+                <input type="checkbox" id="js" name="h_show" value="2.5h" /> 2 horas e meia
             </label>
-            <div class="error" id="erroHabilidades"></div>
+            <div class="error" id="erroHShow"></div>
         </div>
 
         <div class="form-group">
-            <label>Nível Profissional:</label>
-            <label for="junior">
-                <input type="radio" id="junior" name="profissional" value="Junior" /> Junior
+            <label>Estilo de Evento:</label>
+            <label for="festa">
+                <input type="radio" id="festa" name="evento" value="festa" /> Festival de Música
             </label>
-            <label for="pleno">
-                <input type="radio" id="pleno" name="profissional" value="Pleno" /> Pleno
+            <label for="casamento">
+                <input type="radio" id="casamento" name="evento" value="casamento" /> Casamentos
             </label>
-            <label for="senior">
-                <input type="radio" id="senior" name="profissional" value="Sênior" /> Sênior
+            <label for="radios">
+                <input type="radio" id="radios" name="evento" value="radios" /> Radios
             </label>
-            <div class="error" id="erroProfissional"></div>
+            <label for="programa">
+                <input type="radio" id="programa" name="evento" value="programa" /> Programa de TV
+            </label>
+            <label for="navio">
+                <input type="radio" id="navio" name="evento" value="navio" /> Cruzeiros
+            </label>
+            <label for="resort">
+                <input type="radio" id="resort" name="evento" value="resort" /> Resort
+            </label>
+            <div class="error" id="erroEvento"></div>
         </div>
 
         <div class="form-group">
-            <label for="comentarios">Comentários:</label><br />
+            <label for="comentarios">Se quiser deixar sugestões de músicas:</label><br />
             <textarea id="comentarios" name="comentarios" placeholder="Digite seus comentários..."></textarea>
             <div class="error" id="erroComentarios"></div>
         </div>
@@ -110,150 +104,63 @@
 
     <script>
         function processar_formulario(event) {
-            event.preventDefault(); // Impede o envio do formulário e o recarregamento da página
+            event.preventDefault();
 
             let nome = document.querySelector("#nome").value;
-            let dataNascimento = document.querySelector("#data_nascimento").value;
+            let dataShow = document.querySelector("#data_show").value;
             let email = document.querySelector("#email").value;
             let telefone = document.querySelector("#telefone").value;
+            let cidade = document.querySelector("#cidade").value;
             let comentarios = document.querySelector("#comentarios").value;
-            let pais = document.querySelector("#pais").value;
-            let escolaridade = document.querySelector("#escolaridade").value;
-            let profissional = document.querySelector('input[name="profissional"]:checked');
+            let h_show = document.querySelectorAll('input[name="h_show"]:checked');
+            let evento = document.querySelector('input[name="evento"]:checked');
+            let isValid = true;
 
             // Limpa as mensagens de erro
             document.getElementById("erroNome").textContent = "";
-            document.getElementById("erroDataNascimento").textContent = "";
+            document.getElementById("erroDataShow").textContent = "";
             document.getElementById("erroEmail").textContent = "";
             document.getElementById("erroTelefone").textContent = "";
-            document.getElementById("erroHabilidades").textContent = "";
-            document.getElementById("erroPais").textContent = "";
-            document.getElementById("erroEscolaridade").textContent = "";
-            document.getElementById("erroProfissional").textContent = "";
+            document.getElementById("erroCidade").textContent = "";
+            document.getElementById("erroHShow").textContent = "";
+            document.getElementById("erroEvento").textContent = "";
             document.getElementById("erroComentarios").textContent = "";
-
-            let isValid = true;
 
             // Validações
             if (nome.trim() === "") {
-                const msg = "O nome é obrigatório.";
-                document.getElementById("erroNome").textContent = msg;
+                document.getElementById("erroNome").textContent = "O nome é obrigatório.";
                 isValid = false;
             }
-            if (nome.trim().length < 3) {
-                const msg = "O nome deve conter pelo menos 3 letras.";
-                document.getElementById("erroNome").textContent = msg;
+            if (dataShow === "") {
+                document.getElementById("erroDataShow").textContent = "A data do show é obrigatória.";
                 isValid = false;
             }
-
-            if (dataNascimento === "") {
-                const msg = "A data de nascimento é obrigatória.";
-                document.getElementById("erroDataNascimento").textContent = msg;
-                isValid = false;
-            }
-
-            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (email.trim() === "") {
-                const msg = "O e-mail é obrigatório.";
-                document.getElementById("erroEmail").textContent = msg;
-                isValid = false;
-            } else if (!emailPattern.test(email)) {
-                const msg = "Por favor, insira um e-mail válido.";
-                document.getElementById("erroEmail").textContent = msg;
+                document.getElementById("erroEmail").textContent = "O e-mail é obrigatório.";
                 isValid = false;
             }
-
             if (telefone.trim() === "") {
-                const msg = "O telefone é obrigatório.";
-                document.getElementById("erroTelefone").textContent = msg;
-                isValid = false;
-            } else if (telefone.length !== 19) {
-                const msg = "Formato inválido. Use +XX (XX) XXXXX-XXXX";
-                document.getElementById("erroTelefone").textContent = msg;
+                document.getElementById("erroTelefone").textContent = "O telefone é obrigatório.";
                 isValid = false;
             }
-
-            let habilidades = document.querySelectorAll('input[name="habilidades"]:checked');
-            if (habilidades.length === 0) {
-                const msg = "Por favor, selecione ao menos uma habilidade.";
-                document.getElementById("erroHabilidades").textContent = msg;
+            if (cidade === "") {
+                document.getElementById("erroCidade").textContent = "A cidade é obrigatória.";
                 isValid = false;
             }
-
-            if (pais === "") {
-                const msg = "O país é obrigatório.";
-                document.getElementById("erroPais").textContent = msg;
+            if (h_show.length === 0) {
+                document.getElementById("erroHShow").textContent = "Selecione pelo menos um horário.";
                 isValid = false;
             }
-
-            if (escolaridade === "") {
-                const msg = "O Nível de escolaridade é obrigatório.";
-                document.getElementById("erroEscolaridade").textContent = msg;
+            if (!evento) {
+                document.getElementById("erroEvento").textContent = "Escolha o tipo de evento.";
                 isValid = false;
             }
-
-            if (!profissional) {
-                document.getElementById("erroProfissional").textContent = "O nível profissional é obrigatório.";
-                isValid = false;
-            }
-
 
             if (isValid) {
-                alert("Formulário enviado com sucesso!");
-
-                // Limpa os campos do formulário após o alerta
-                setTimeout(function () {
-                    document.getElementById("formCadastro").reset();  // Limpa os campos
-                }, 100);
+                alert("Agendamento feito! Entraremos em contato em tres dias");
+                document.getElementById("formCadastro").reset();
             }
         }
-
-        // Formatação do telefone
-        document.addEventListener('DOMContentLoaded', function () {
-            const telefoneInput = document.getElementById('telefone');
-            telefoneInput.addEventListener('input', function () {
-                let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
-
-                if (valor.length > 19) {
-                    valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
-                }
-
-                let formatado = '';
-
-                if (valor.length > 0 && valor[0] !== '+') {
-                    valor = '+' + valor;
-                }
-
-                if (valor.length > 1) {
-                    formatado = valor.substring(0, 3);
-                }
-                if (valor.length > 3) {
-                    formatado += ' (' + valor.substring(3, 5) + ') ';
-                }
-                if (valor.length > 5) {
-                    formatado += valor.substring(5, 10);
-                }
-                if (valor.length > 9) {
-                    formatado += '-';
-                }
-                if (valor.length > 10) {
-                    formatado += valor.substring(10, 15);
-                }
-
-                telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-            });
-        });
-    </script>
-
-
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_edi
-tor.pkgd.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_e
-ditor.pkgd.min.css" rel="stylesheet" type="text/css" />
-    <script>
-        new FroalaEditor
-            ('textarea');
     </script>
 </body>
 
