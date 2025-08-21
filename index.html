@@ -121,46 +121,39 @@
     </form>
 
     <script>
-        // Formatação do telefone
-        document.addEventListener('DOMContentLoaded', function () {
-            const telefoneInput = document.getElementById('telefone');
+          // Formatação do telefone
+    document.addEventListener('DOMContentLoaded', function () {
+        const telefoneInput = document.getElementById('telefone');
 
-            telefoneInput.addEventListener('input', function () {
-                let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+        telefoneInput.addEventListener('input', function () {
+            let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
 
-                if (valor.length > 19) {
-                    valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
-                }
+            if (valor.length > 15) {
+                valor = valor.substring(0, 15); // Limita a 15 caracteres
+            }
 
-                let formatado = '';
+            let formatado = '';
 
-                if (valor.length > 0 && valor[0] !== '+') {
-                    valor = '+' + valor;
-                }
+            if (valor.length > 0 && valor[0] !== '+') {
+                valor = '+55'; // Prefixo do país (55)
+            }
 
-                if (valor.length > 1) {
-                    formatado = valor.substring(0, 3);
-                }
+            if (valor.length > 3) {
+                formatado = valor.substring(0, 5) + ' (' + valor.substring(5, 7) + ') ';
+            }
 
-                if (valor.length > 3) {
-                    formatado += ' (' + valor.substring(3, 5) + ') ';
-                }
+            if (valor.length > 7) {
+                formatado += valor.substring(7, 12);
+            }
 
-                if (valor.length > 5) {
-                    formatado += valor.substring(5, 10);
-                }
+            if (valor.length > 12) {
+                formatado += '-';
+                formatado += valor.substring(12, 15); // Limita até o formato desejado
+            }
 
-                if (valor.length > 9) {
-                    formatado += '-';
-                }
-
-                if (valor.length > 10) {
-                    formatado += valor.substring(10, 15);
-                }
-
-                telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-            });
+            telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
         });
+    });
 
         function processar_formulario(event) {
             event.preventDefault();
@@ -237,3 +230,4 @@
 
 </body>
 </html>
+
