@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -35,8 +36,8 @@
             <input type="tel" id="telefone" name="telefone" placeholder="+XX (XX) XXXXX-XXXX" maxlength="19" />
             <div class="error" id="erroTelefone"></div>
         </div>
-        
-<div class="form-group">
+
+        <div class="form-group">
             <label for="estado">Escolha um estado:</label>
             <select id="estado" name="estado">
                 <option value="BA">Bahia</option>
@@ -52,7 +53,7 @@
             </select>
             <div class="error" id="erroEstado"></div>
         </div>
-        
+
         <div class="form-group">
             <label for="cidade">Cidade:</label>
             <select id="cidade" name="cidade">
@@ -118,10 +119,9 @@
             <button type="submit">Enviar</button>
         </div>
     </form>
-    
 
     <script>
-                // Formatação do telefone
+        // Formatação do telefone
         document.addEventListener('DOMContentLoaded', function () {
             const telefoneInput = document.getElementById('telefone');
 
@@ -170,6 +170,7 @@
             let email = document.querySelector("#email").value;
             let telefone = document.querySelector("#telefone").value;
             let cidade = document.querySelector("#cidade").value;
+            let estado = document.querySelector("#estado").value;
             let comentarios = document.querySelector("#comentarios").value;
             let h_show = document.querySelectorAll('input[name="h_show"]:checked');
             let evento = document.querySelector('input[name="evento"]:checked');
@@ -181,6 +182,7 @@
             document.getElementById("erroEmail").textContent = "";
             document.getElementById("erroTelefone").textContent = "";
             document.getElementById("erroCidade").textContent = "";
+            document.getElementById("erroEstado").textContent = "";
             document.getElementById("erroHShow").textContent = "";
             document.getElementById("erroEvento").textContent = "";
             document.getElementById("erroComentarios").textContent = "";
@@ -206,6 +208,10 @@
                 document.getElementById("erroCidade").textContent = "A cidade é obrigatória.";
                 isValid = false;
             }
+            if (estado === "") {
+                document.getElementById("erroEstado").textContent = "O estado é obrigatório.";
+                isValid = false;
+            }
             if (h_show.length === 0) {
                 document.getElementById("erroHShow").textContent = "Selecione pelo menos um horário.";
                 isValid = false;
@@ -216,61 +222,18 @@
             }
 
             if (isValid) {
-                alert("Agendamento feito! Entraremos em contato em tres dias");
+                alert("Agendamento feito! Entraremos em contato em três dias.");
                 document.getElementById("formCadastro").reset();
             }
         }
+    </script>
 
-    // Função para formatar o telefone
-    document.addEventListener('DOMContentLoaded', function () {
-        const telefoneInput = document.getElementById('telefone');
-        
-        telefoneInput.addEventListener('input', function () {
-            let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
 
-            if (valor.length > 19) {
-                valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
-            }
-
-            let formatado = '';
-            
-            if (valor.length > 0 && valor[0] !== '+') {
-                valor = '+' + valor;
-            }
-
-            if (valor.length > 1) {
-                formatado = valor.substring(0, 3);
-            }
-
-            if (valor.length > 3) {
-                formatado += ' (' + valor.substring(3, 5) + ') ';
-            }
-
-            if (valor.length > 5) {
-                formatado += valor.substring(5, 10);
-            }
-
-            if (valor.length > 9) {
-                formatado += '-';
-            }
-
-            if (valor.length > 10) {
-                formatado += valor.substring(10, 15);
-            }
-
-            telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
-        });
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-
-<script>
-    new FroalaEditor('textarea');
-</script>
+    <script>
+        new FroalaEditor('textarea');
+    </script>
 
 </body>
 </html>
-
-
