@@ -35,7 +35,24 @@
             <input type="tel" id="telefone" name="telefone" placeholder="+XX (XX) XXXXX-XXXX" maxlength="19" />
             <div class="error" id="erroTelefone"></div>
         </div>
-
+        
+<div class="form-group">
+            <label for="estado">Escolha um estado:</label>
+            <select id="estado" name="estado">
+                <option value="BA">Bahia</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PR">Paraná</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SE">Sergipe</option>
+                <option value="SP">São Paulo</option>
+            </select>
+            <div class="error" id="erroEstado"></div>
+        </div>
+        
         <div class="form-group">
             <label for="cidade">Cidade:</label>
             <select id="cidade" name="cidade">
@@ -101,8 +118,50 @@
             <button type="submit">Enviar</button>
         </div>
     </form>
+    
 
     <script>
+                // Formatação do telefone
+        document.addEventListener('DOMContentLoaded', function () {
+            const telefoneInput = document.getElementById('telefone');
+
+            telefoneInput.addEventListener('input', function () {
+                let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+                if (valor.length > 19) {
+                    valor = valor.substring(0, 19); // Limita a 19 caracteres numéricos
+                }
+
+                let formatado = '';
+
+                if (valor.length > 0 && valor[0] !== '+') {
+                    valor = '+' + valor;
+                }
+
+                if (valor.length > 1) {
+                    formatado = valor.substring(0, 3);
+                }
+
+                if (valor.length > 3) {
+                    formatado += ' (' + valor.substring(3, 5) + ') ';
+                }
+
+                if (valor.length > 5) {
+                    formatado += valor.substring(5, 10);
+                }
+
+                if (valor.length > 9) {
+                    formatado += '-';
+                }
+
+                if (valor.length > 10) {
+                    formatado += valor.substring(10, 15);
+                }
+
+                telefoneInput.value = formatado; // Atualiza o valor do input com a máscara
+            });
+        });
+
         function processar_formulario(event) {
             event.preventDefault();
 
@@ -213,4 +272,5 @@
 
 </body>
 </html>
+
 
